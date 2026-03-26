@@ -1,81 +1,232 @@
+"""
+GEPA for AIME (Math)
+
+Optimizes GPT-4.1 Mini's Chain of Thought (dspy.ChainOfThought) for solving
+math problems (AIME) using the GEPA optimizer.
+
+Dataset:
+  - Train/Val: AIME 2022-2024 (90 problems, split 50/50)
+  - Test: AIME 2025 (30 problems × 5 repeats for stability)
+"""
+
 import os
+import random
+import re
 
 import dspy
+from datasets import load_dataset
+from dotenv import load_dotenv
 
-from examples.aime_math.utils import evaluate_on_dataset, load_math_dataset, math_metric, run_llm
-from gepa.optimize_anything import (
-    EngineConfig,
-    GEPAConfig,
-    ReflectionConfig,
-    SideInfo,
-    optimize_anything,
-)
+import gepa
+from gepa.adapters.dspy_adapter.dspy_adapter import DspyAdapter, ScoreWithFeedback
+from examples.aime_math.logger import ResearchLogger
+
+load_dotenv()
 
 
-def evaluate(candidate: str, example) -> tuple[float, SideInfo]:
-    """Evaluate a candidate on a single example."""
-    prediction = run_llm(example, candidate)
-    score, feedback = math_metric(example, prediction)
+# ---------------------------------------------------------------------------
+# Dataset
+# ---------------------------------------------------------------------------
 
-    side_info = {
-        "score": score,
-        "input": example.input,
-        "prompt": candidate,
-        "output": prediction.answer,
-        "reasoning": getattr(prediction, "reasoning", ""),
-        "execution_feedback": feedback,
-    }
+def init_dataset():
+    train_split = load_dataset("AI-MO/aimo-validation-aime")["train"]
+    train_split = [
+        dspy.Example({
+            "problem": x["problem"],
+            "solution": x["solution"],
+            "answer": x["answer"],
+        }).with_inputs("problem")
+        for x in train_split
+    ]
+    random.Random(0).shuffle(train_split)
+    tot_num = len(train_split)
 
-    return score, side_info
+    test_split = load_dataset("MathArena/aime_2025")["train"]
+    test_split = [
+        dspy.Example({
+            "problem": x["problem"],
+            "answer": x["answer"],
+        }).with_inputs("problem")
+        for x in test_split
+    ]
 
+    train_set = train_split[: int(0.5 * tot_num)]
+    val_set = train_split[int(0.5 * tot_num):]
+    test_set = test_split * 5
+
+    return train_set, val_set, test_set
+
+
+# ---------------------------------------------------------------------------
+# Program
+# ---------------------------------------------------------------------------
+
+class GenerateResponse(dspy.Signature):
+    """Solve the problem and provide the answer in the correct format."""
+
+    problem = dspy.InputField()
+    answer = dspy.OutputField()
+
+
+program = dspy.ChainOfThought(GenerateResponse)
+
+
+# ---------------------------------------------------------------------------
+# Metrics
+# ---------------------------------------------------------------------------
+
+def extract_integer(raw: str) -> int:
+    """Extract an integer from an LLM answer, stripping LaTeX and extra text.
+
+    Handles: \\boxed{123}, $123$, "123 minutes", "The answer is 123", etc.
+    """
+    s = str(raw).strip()
+    # Strip \boxed{...} (possibly nested in \[ \] or $ $)
+    m = re.search(r"\\boxed\{([^}]+)\}", s)
+    if m:
+        s = m.group(1).strip()
+    # Strip surrounding $ or \( \) or \[ \]
+    s = re.sub(r"^[\$\\(\[]+|[\$\\)\]]+$", "", s).strip()
+    # Try direct parse first
+    try:
+        return int(s)
+    except ValueError:
+        pass
+    # Extract the first integer-like token (optional leading minus)
+    m = re.search(r"-?\d+", s)
+    if m:
+        return int(m.group())
+    raise ValueError(f"Could not extract integer from: {raw!r}")
+
+
+def metric(example, prediction, trace=None, pred_name=None, pred_trace=None):
+    """Simple exact-match metric for evaluation."""
+    correct_answer = int(example["answer"])
+    try:
+        llm_answer = extract_integer(prediction.answer)
+    except (ValueError, TypeError):
+        return 0
+    return int(correct_answer == llm_answer)
+
+
+def metric_with_feedback(example, prediction, trace=None, pred_name=None, pred_trace=None):
+    """Rich feedback metric for GEPA optimization.
+
+    Returns dspy.Prediction(score=..., feedback=...) so the reflection LM
+    can see *why* the answer was wrong, including full solutions when available.
+    """
+    correct_answer = int(example["answer"])
+    written_solution = example.get("solution", "")
+
+    try:
+        llm_answer = extract_integer(prediction.answer)
+    except (ValueError, TypeError):
+        feedback_text = (
+            f"The final answer must be a valid integer and nothing else. "
+            f"You responded with '{prediction.answer}', which couldn't be parsed as a python integer. "
+            f"Please ensure your answer is a valid integer without any additional text or formatting."
+            f" The correct answer is '{correct_answer}'."
+        )
+        if written_solution:
+            feedback_text += (
+                f" Here's the full step-by-step solution:\n{written_solution}\n\n"
+                "Think about what takeaways you can learn from this solution to improve your "
+                "future answers and approach to similar problems and ensure your final answer "
+                "is a valid integer."
+            )
+        return dspy.Prediction(score=0, feedback=feedback_text)
+
+    score = int(correct_answer == llm_answer)
+
+    if score == 1:
+        feedback_text = f"Your answer is correct. The correct answer is '{correct_answer}'."
+    else:
+        feedback_text = f"Your answer is incorrect. The correct answer is '{correct_answer}'."
+
+    if written_solution:
+        feedback_text += (
+            f" Here's the full step-by-step solution:\n{written_solution}\n\n"
+            "Think about what takeaways you can learn from this solution to improve your "
+            "future answers and approach to similar problems."
+        )
+
+    return dspy.Prediction(score=score, feedback=feedback_text)
+
+
+def predictor_feedback(predictor_output, predictor_inputs, module_inputs, module_outputs, captured_trace):
+    """Per-predictor feedback bridge for DspyAdapter."""
+    result = metric_with_feedback(module_inputs, module_outputs)
+    return ScoreWithFeedback(score=result.score, feedback=result.feedback)
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
 def main():
-    INITIAL_PROMPT = (
-        "Solve the math problem carefully. Break down the steps and provide the final answer as a single number."
+    api_key = os.environ["OPENAI_API_KEY"]
+    lm = dspy.LM("openai/gpt-4.1-mini", temperature=1, api_key=api_key, max_tokens=32000)
+    dspy.configure(lm=lm)
+
+    train_set, val_set, test_set = init_dataset()
+    print(f"Dataset: {len(train_set)} train, {len(val_set)} val, {len(test_set)} test")
+
+    # --- Baseline evaluation ---
+    print("\nEvaluating unoptimized Chain Of Thought...")
+    evaluate = dspy.Evaluate(
+        devset=test_set,
+        metric=metric,
+        num_threads=32,
+        display_table=True,
+        display_progress=True,
     )
+    baseline_result = evaluate(program)
 
-    api_key = os.environ.get("OPENAI_API_KEY")
-    solver_lm = dspy.LM("gpt-4.1-mini", api_key=api_key, temperature=1.0, max_tokens=32000)
-    dspy.configure(lm=solver_lm)
+    # --- Optimize with GEPA ---
+    seed_candidate = {"predict": program.predict.signature.instructions}
 
-    trainset, valset, testset = load_math_dataset()
-
-    gepa_config = GEPAConfig(
-        engine=EngineConfig(
-            run_dir="outputs/aime_math",
-            max_metric_calls=500,
-            track_best_outputs=True,
-            parallel=True,
-            max_workers=32,
-            cache_evaluation=True,
+    adapter = DspyAdapter(
+        student_module=program,
+        metric_fn=metric_with_feedback,
+        feedback_map={"predict": predictor_feedback},
+        num_threads=32,
+        reflection_minibatch_size=3,
+        reflection_lm=dspy.LM(
+            model="openai/gpt-5",
+            temperature=1.0,
+            max_tokens=32000,
+            api_key=api_key,
         ),
-        reflection=ReflectionConfig(
-            reflection_lm="openai/gpt-5.1",
-        ),
     )
 
-    result = optimize_anything(
-        seed_candidate=INITIAL_PROMPT,
-        evaluator=evaluate,
-        dataset=trainset,
-        valset=valset,
-        config=gepa_config,
+    logger = ResearchLogger("outputs/aime_math/research_logs")
+
+    result = gepa.optimize(
+        seed_candidate=seed_candidate,
+        trainset=train_set,
+        valset=val_set,
+        adapter=adapter,
+        reflection_minibatch_size=3,
+        max_metric_calls=500,
+        run_dir="outputs/aime_math",
+        callbacks=[logger],
+        cache_evaluation=True,
+        track_best_outputs=True,
+        use_cloudpickle=True,
     )
 
-    # Baseline Evaluation
-    print("\nEvaluating Baseline (Initial Prompt)...")
-    baseline_score = evaluate_on_dataset(INITIAL_PROMPT, testset)
+    # --- Print optimized prompt ---
+    optimized_program = adapter.build_program(result.best_candidate)
+    print("\nOptimized instruction:")
+    print(optimized_program.predict.signature.instructions)
 
-    # Optimized Evaluation
-    print("\nEvaluating Best Optimized Program...")
-    best_prompt = result.best_candidate
-    print(f"Best Prompt Found:\n{best_prompt}")
+    # --- Evaluate optimized program ---
+    print("\nEvaluating optimized Chain Of Thought...")
+    optimized_result = evaluate(optimized_program)
 
-    optimized_score = evaluate_on_dataset(best_prompt, testset)
-
-    print(f"Baseline Score: {baseline_score:.2%}")
-    print(f"Optimized Score: {optimized_score:.2%}")
-    print(f"Improvement: {optimized_score - baseline_score:.2%}")
+    print(f"\nBaseline Score: {baseline_result.score:.1f}%")
+    print(f"Optimized Score: {optimized_result.score:.1f}%")
+    print(f"Improvement: {optimized_result.score - baseline_result.score:+.1f}%")
 
 
 if __name__ == "__main__":

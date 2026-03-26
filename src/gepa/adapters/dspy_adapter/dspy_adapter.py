@@ -294,14 +294,11 @@ class DspyAdapter(GEPAAdapter[Example, TraceData, Prediction]):
                 devset=batch,
                 metric=self.metric_fn,
                 num_threads=self.num_threads,
-                return_all_scores=True,
-                return_outputs=True,
                 failure_score=self.failure_score,
                 provide_traceback=True,
                 max_errors=len(batch) * 100,
-                callback_metadata=callback_metadata,
             )
-            res = evaluator(program)
+            res = evaluator(program, callback_metadata=callback_metadata)
             outputs = [r[1] for r in res.results]
             raw_scores = [r[2] for r in res.results]
             for raw_score in raw_scores:
