@@ -178,7 +178,7 @@ def main():
     print(f"Dataset: {len(train_set)} train, {len(val_set)} val, {len(test_set)} test")
 
     question_logger = QuestionLogger(
-        log_dir="outputs/aime_math/research_logs",
+        log_dir="outputs/aime_math_hbs/research_logs",
         valset=val_set,
         extract_fn=extract_integer,
     )
@@ -213,16 +213,17 @@ def main():
         ),
     )
 
-    logger = ResearchLogger("outputs/aime_math/research_logs")
+    logger = ResearchLogger("outputs/aime_math_hbs/research_logs")
 
     result = gepa.optimize(
         seed_candidate=seed_candidate,
         trainset=train_set,
         valset=val_set,
         adapter=adapter,
+        batch_sampler="history_based",
         reflection_minibatch_size=3,
         max_metric_calls=500,
-        run_dir="outputs/aime_math",
+        run_dir="outputs/aime_math_hbs",
         callbacks=[logger, question_logger],
         cache_evaluation=True,
         track_best_outputs=True,
