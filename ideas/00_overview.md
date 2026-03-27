@@ -14,6 +14,13 @@ GEPA's fundamental tension: **specificity** is needed for reflection (the LLM mu
 ### Training Signal
 3. **[Adversarial Curriculum](03_adversarial_curriculum.md)** — Co-evolve the training set alongside candidates. After each accepted candidate, generate adversarial examples that target its weaknesses. This creates a minimax game where the candidate must develop robust strategies.
 
+### Minibatch Sampling
+7. **[Failure-Directed Sampling (Embedding)](07_failure_directed_sampling.md)** — Embedding-based variant. Uses kernel-weighted interpolation from train-side scores to predict failures in unvisited regions of the embedding space. More powerful for large datasets where direct coverage is sparse.
+
+8. **[History-Based Active Sampling](08_history_based_sampling.md)** — The simpler, embedding-free variant. Each (prompt, question) pair has two latent quantities: expected current score (from last observation decayed by staleness) and learnability (Beta-Bernoulli posterior over improvement/failure counts). Sampling weight = expected failure x learnability. No external dependencies, no spatial assumptions. Decay naturally creates exploration pressure — stale scores revert to the prior, forcing re-evaluation. Val set is never consulted.
+
+9. **[Contrastive Minimal Pairs Reflection](09_contrastive_pairs_reflection.md)** — Change the *signal structure* seen by the reflection LM, not just which examples it sees. Construct minibatches as matched pairs `(A, B)` where the candidate solves A but fails B and A ≅ B (embedding-close). The LM reflects on the *differential* between success and failure rather than on failures in isolation. By construction, if A ≅ B but scores differ, the failure is due to surface-feature sensitivity — which is the exact overfitting fingerprint. Contrastive signal hands the LM this fingerprint directly rather than asking it to infer from single-example traces.
+
 ### Selection Mechanism
 4. **[Robust Pareto Selection](04_robust_pareto_selection.md)** — Replace per-example Pareto optimality with per-group optimality. Candidates must demonstrate consistent performance across groups of examples, not just spike on individuals. Grounded in distributionally robust optimization.
 
@@ -68,8 +75,17 @@ Framing B is more novel — nobody has studied the role of embedding geometry in
 │                  │──>│                  │<──│                     │
 │ 3. Adversarial   │   │  evaluate,       │   │ 4. Robust Pareto    │
 │    Curriculum    │   │  accept/reject   │   │ 5. Quality-Diversity│
-└─────────────────┘   └──────────────────┘   └─────────────────────┘
-   harder examples            │                  better parents
+└─────────────────┘   └────────┬─────────┘   └─────────────────────┘
+   harder examples             │                  better parents
+                               │
+                    ┌──────────v───────────────────────────┐
+                    │         Minibatch Sampling            │
+                    │                                       │
+                    │ 7. Failure-Directed Sampling          │──── which examples to show
+                    │ 8. History-Based Active Sampling      │──── the LM (train-side only)
+                    │ 9. Contrastive Minimal Pairs          │──── *how* to show them
+                    └──────────┬────────────────────────────┘
+                               │
                               │
          ┌────────────────────v───────────────────────┐
          │  6. Embedding-Informed Search (cross-cutting) │
@@ -77,10 +93,10 @@ Framing B is more novel — nobody has studied the role of embedding geometry in
          │  Provides geometric scaffolding to ALL above: │
          │  - Retrieval memory for mutation (1, 2)      │
          │  - Diversity signal for selection (4, 5)     │
-         │  - Informed sampling for training (3)        │
+         │  - Pair-finding for contrastive reflection (9)│
          └──────────────────────────────────────────────┘
 ```
 
 Idea 6 is cross-cutting — it provides infrastructure (embedding-based geometry) that makes the other ideas cheaper or more effective. Retrieval-augmented reflection (6) is a lightweight alternative to full meta-reflection (1). Embedding diversity (6) is a cheap proxy for LLM-based behavior characterization (5). Embedding-based minibatch sampling (6) targets training signal quality alongside adversarial curriculum (3).
 
-Ideas 1-5 are independent interventions on specific components. Idea 6 is a substrate that improves all of them.
+Ideas 1-5 are independent interventions on specific components. Idea 6 is a substrate that improves all of them. Ideas 7 and 8 improve *which* examples the LM reflects on; Idea 9 changes *what structure* it sees when it reflects. Ideas 7/8/9 are orthogonal at the minibatch level and can be combined: use 7 or 8 to select which failures matter most, then use 9 to pair those failures with their nearest successes.

@@ -133,7 +133,7 @@ from gepa.logging.logger import Logger, LoggerProtocol, StdOutLogger
 from gepa.proposer.merge import MergeProposer
 from gepa.proposer.reflective_mutation.base import CandidateSelector, LanguageModel, ReflectionComponentSelector
 from gepa.proposer.reflective_mutation.reflective_mutation import ReflectiveMutationProposer
-from gepa.strategies.batch_sampler import BatchSampler, EpochShuffledBatchSampler
+from gepa.strategies.batch_sampler import BatchSampler, EpochShuffledBatchSampler, HistoryBasedBatchSampler
 from gepa.strategies.candidate_selector import (
     CurrentBestCandidateSelector,
     EpsilonGreedyCandidateSelector,
@@ -712,7 +712,7 @@ class ReflectionConfig:
 
     skip_perfect_score: bool = False
     perfect_score: float | None = None
-    batch_sampler: BatchSampler | Literal["epoch_shuffled"] = "epoch_shuffled"
+    batch_sampler: BatchSampler | Literal["epoch_shuffled", "history_based"] = "epoch_shuffled"
     reflection_minibatch_size: int | None = None  # Default: 1 for single-instance mode, 3 otherwise
     module_selector: ReflectionComponentSelector | Literal["round_robin", "all"] = "round_robin"
     reflection_lm: LanguageModel | str | None = "openai/gpt-5.1"
@@ -1350,6 +1350,10 @@ def optimize_anything(
     # --- 7. Build batch sampler from ReflectionConfig ---
     if config.reflection.batch_sampler == "epoch_shuffled":
         config.reflection.batch_sampler = EpochShuffledBatchSampler(
+            minibatch_size=config.reflection.reflection_minibatch_size, rng=rng
+        )
+    elif config.reflection.batch_sampler == "history_based":
+        config.reflection.batch_sampler = HistoryBasedBatchSampler(
             minibatch_size=config.reflection.reflection_minibatch_size, rng=rng
         )
 

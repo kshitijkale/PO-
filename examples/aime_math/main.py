@@ -18,8 +18,9 @@ from datasets import load_dataset
 from dotenv import load_dotenv
 
 import gepa
-from gepa.adapters.dspy_adapter.dspy_adapter import DspyAdapter, ScoreWithFeedback
+from gepa.adapters.dspy_adapter.dspy_adapter import DspyAdapter
 from examples.aime_math.logger import ResearchLogger
+from examples.aime_math.question_logger import QuestionLogger
 
 load_dotenv()
 
@@ -154,9 +155,14 @@ def metric_with_feedback(example, prediction, trace=None, pred_name=None, pred_t
 
 
 def predictor_feedback(predictor_output, predictor_inputs, module_inputs, module_outputs, captured_trace):
-    """Per-predictor feedback bridge for DspyAdapter."""
+    """Per-predictor feedback bridge for DspyAdapter.
+
+    Returns a dict (not ScoreWithFeedback) because ScoreWithFeedback has a
+    class-attribute bug: ``feedback: str | None = None`` shadows Prediction's
+    internal _store, so .feedback always returns None regardless of the value passed.
+    """
     result = metric_with_feedback(module_inputs, module_outputs)
-    return ScoreWithFeedback(score=result.score, feedback=result.feedback)
+    return {"score": result.score, "feedback": result.feedback}
 
 
 # ---------------------------------------------------------------------------
@@ -171,16 +177,24 @@ def main():
     train_set, val_set, test_set = init_dataset()
     print(f"Dataset: {len(train_set)} train, {len(val_set)} val, {len(test_set)} test")
 
+    question_logger = QuestionLogger(
+        log_dir="outputs/aime_math/research_logs",
+        valset=val_set,
+        extract_fn=extract_integer,
+    )
+
     # --- Baseline evaluation ---
     print("\nEvaluating unoptimized Chain Of Thought...")
+    capturing_metric = question_logger.make_capturing_metric(metric)
     evaluate = dspy.Evaluate(
         devset=test_set,
-        metric=metric,
+        metric=capturing_metric,
         num_threads=32,
         display_table=True,
         display_progress=True,
     )
     baseline_result = evaluate(program)
+    question_logger.log_captured_test("test_baseline")
 
     # --- Optimize with GEPA ---
     seed_candidate = {"predict": program.predict.signature.instructions}
@@ -209,7 +223,7 @@ def main():
         reflection_minibatch_size=3,
         max_metric_calls=500,
         run_dir="outputs/aime_math",
-        callbacks=[logger],
+        callbacks=[logger, question_logger],
         cache_evaluation=True,
         track_best_outputs=True,
         use_cloudpickle=True,
@@ -222,11 +236,25 @@ def main():
 
     # --- Evaluate optimized program ---
     print("\nEvaluating optimized Chain Of Thought...")
-    optimized_result = evaluate(optimized_program)
+    evaluate_opt = dspy.Evaluate(
+        devset=test_set,
+        metric=question_logger.make_capturing_metric(metric),
+        num_threads=32,
+        display_table=True,
+        display_progress=True,
+    )
+    optimized_result = evaluate_opt(optimized_program)
+    question_logger.log_captured_test("test_optimized")
 
-    print(f"\nBaseline Score: {baseline_result.score:.1f}%")
-    print(f"Optimized Score: {optimized_result.score:.1f}%")
-    print(f"Improvement: {optimized_result.score - baseline_result.score:+.1f}%")
+    # Handle both float and object return types from dspy.Evaluate
+    baseline_score = baseline_result if isinstance(baseline_result, (int, float)) else baseline_result.score
+    optimized_score = optimized_result if isinstance(optimized_result, (int, float)) else optimized_result.score
+
+    print(f"\nBaseline Score: {baseline_score:.1f}%")
+    print(f"Optimized Score: {optimized_score:.1f}%")
+    print(f"Improvement: {optimized_score - baseline_score:+.1f}%")
+
+    question_logger.close()
 
 
 if __name__ == "__main__":

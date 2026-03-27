@@ -24,7 +24,7 @@ from gepa.logging.logger import Logger, LoggerProtocol, StdOutLogger
 from gepa.proposer.merge import MergeProposer
 from gepa.proposer.reflective_mutation.base import CandidateSelector, LanguageModel, ReflectionComponentSelector
 from gepa.proposer.reflective_mutation.reflective_mutation import ReflectiveMutationProposer
-from gepa.strategies.batch_sampler import BatchSampler, EpochShuffledBatchSampler
+from gepa.strategies.batch_sampler import BatchSampler, EpochShuffledBatchSampler, HistoryBasedBatchSampler
 from gepa.strategies.candidate_selector import (
     CurrentBestCandidateSelector,
     EpsilonGreedyCandidateSelector,
@@ -52,7 +52,7 @@ def optimize(
     | Literal["pareto", "current_best", "epsilon_greedy", "top_k_pareto"] = "pareto",
     frontier_type: FrontierType = "instance",
     skip_perfect_score: bool = True,
-    batch_sampler: BatchSampler | Literal["epoch_shuffled"] = "epoch_shuffled",
+    batch_sampler: BatchSampler | Literal["epoch_shuffled", "history_based"] = "epoch_shuffled",
     reflection_minibatch_size: int | None = None,
     perfect_score: float = 1.0,
     reflection_prompt_template: str | dict[str, str] | None = None,
@@ -315,9 +315,11 @@ def optimize(
 
     if batch_sampler == "epoch_shuffled":
         batch_sampler = EpochShuffledBatchSampler(minibatch_size=reflection_minibatch_size or 3, rng=rng)
+    elif batch_sampler == "history_based":
+        batch_sampler = HistoryBasedBatchSampler(minibatch_size=reflection_minibatch_size or 3, rng=rng)
     else:
         assert reflection_minibatch_size is None, (
-            "reflection_minibatch_size only accepted if batch_sampler is 'epoch_shuffled'"
+            "reflection_minibatch_size only accepted if batch_sampler is 'epoch_shuffled' or 'history_based'"
         )
 
     experiment_tracker = create_experiment_tracker(
