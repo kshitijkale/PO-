@@ -1,0 +1,4 @@
+{
+    "reasoning": "Given isosceles trapezoid \\(ABCD\\) with \\(AB \\parallel CD\\), lengths \\(AB=500\\), \\(CD=650\\), and equal legs \\(AD=BC=333\\).\n\nFrom the known geometric property of isosceles trapezoids, the segment \\(PQ\\), where \\(P\\) is the intersection of the angle bisectors at vertices \\(A\\) and \\(D\\), and \\(Q\\) is the intersection of the angle bisectors at \\(B\\) and \\(C\\), is parallel to the bases. Moreover, \\(PQ = \\frac{AB + CD}{2} - AD\\) (since \\(AD=BC\\)).\n\nCalculate:\n\\[\nPQ = \\frac{500 + 650}{2} - 333 = \\frac{1150}{2} - 333 = 575 - 333 = 242.\n\\]",
+    "answer": "242"
+}

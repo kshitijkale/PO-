@@ -1,0 +1,678 @@
+Dataset: 45 train, 45 val, 150 test
+
+Evaluating unoptimized Chain Of Thought...
+  0%|          | 0/150 [00:00<?, ?it/s]Average Metric: 1.00 / 1 (100.0%):   0%|          | 0/150 [00:01<?, ?it/s]Average Metric: 1.00 / 1 (100.0%):   1%|          | 1/150 [00:01<02:59,  1.21s/it]Average Metric: 1.00 / 2 (50.0%):   1%|          | 1/150 [00:01<02:59,  1.21s/it] Average Metric: 1.00 / 3 (33.3%):   1%|▏         | 2/150 [00:01<02:58,  1.21s/it]Average Metric: 2.00 / 4 (50.0%):   2%|▏         | 3/150 [00:01<02:57,  1.21s/it]Average Metric: 3.00 / 5 (60.0%):   3%|▎         | 4/150 [00:01<02:56,  1.21s/it]Average Metric: 3.00 / 6 (50.0%):   3%|▎         | 5/150 [00:01<02:54,  1.21s/it]Average Metric: 3.00 / 7 (42.9%):   4%|▍         | 6/150 [00:01<02:53,  1.21s/it]Average Metric: 4.00 / 8 (50.0%):   5%|▍         | 7/150 [00:01<02:52,  1.21s/it]Average Metric: 4.00 / 9 (44.4%):   5%|▌         | 8/150 [00:01<02:51,  1.21s/it]Average Metric: 5.00 / 10 (50.0%):   6%|▌         | 9/150 [00:01<02:50,  1.21s/it]Average Metric: 6.00 / 11 (54.5%):   7%|▋         | 10/150 [00:01<02:48,  1.21s/it]Average Metric: 7.00 / 12 (58.3%):   7%|▋         | 11/150 [00:01<02:47,  1.21s/it]Average Metric: 7.00 / 13 (53.8%):   8%|▊         | 12/150 [00:01<02:46,  1.21s/it]Average Metric: 8.00 / 14 (57.1%):   9%|▊         | 13/150 [00:01<02:45,  1.21s/it]Average Metric: 8.00 / 15 (53.3%):   9%|▉         | 14/150 [00:01<02:44,  1.21s/it]Average Metric: 8.00 / 16 (50.0%):  10%|█         | 15/150 [00:01<02:42,  1.21s/it]Average Metric: 8.00 / 17 (47.1%):  11%|█         | 16/150 [00:01<02:41,  1.21s/it]Average Metric: 9.00 / 18 (50.0%):  11%|█▏        | 17/150 [00:01<02:40,  1.21s/it]Average Metric: 10.00 / 19 (52.6%):  12%|█▏        | 18/150 [00:01<02:39,  1.21s/it]Average Metric: 10.00 / 20 (50.0%):  13%|█▎        | 19/150 [00:01<02:38,  1.21s/it]Average Metric: 11.00 / 21 (52.4%):  13%|█▎        | 20/150 [00:01<02:36,  1.21s/it]Average Metric: 12.00 / 22 (54.5%):  14%|█▍        | 21/150 [00:01<02:35,  1.21s/it]Average Metric: 13.00 / 23 (56.5%):  15%|█▍        | 22/150 [00:01<02:34,  1.21s/it]Average Metric: 13.00 / 24 (54.2%):  15%|█▌        | 23/150 [00:01<02:33,  1.21s/it]Average Metric: 13.00 / 25 (52.0%):  16%|█▌        | 24/150 [00:01<02:31,  1.21s/it]Average Metric: 14.00 / 26 (53.8%):  17%|█▋        | 25/150 [00:01<02:30,  1.21s/it]Average Metric: 14.00 / 26 (53.8%):  17%|█▋        | 26/150 [00:01<00:04, 26.62it/s]Average Metric: 14.00 / 27 (51.9%):  17%|█▋        | 26/150 [00:01<00:04, 26.62it/s]Average Metric: 14.00 / 28 (50.0%):  18%|█▊        | 27/150 [00:01<00:04, 26.62it/s]Average Metric: 14.00 / 29 (48.3%):  19%|█▊        | 28/150 [00:01<00:04, 26.62it/s]Average Metric: 14.00 / 30 (46.7%):  19%|█▉        | 29/150 [00:01<00:04, 26.62it/s]Average Metric: 15.00 / 31 (48.4%):  20%|██        | 30/150 [00:01<00:04, 26.62it/s]Average Metric: 16.00 / 32 (50.0%):  21%|██        | 31/150 [00:01<00:04, 26.62it/s]Average Metric: 17.00 / 33 (51.5%):  21%|██▏       | 32/150 [00:01<00:04, 26.62it/s]Average Metric: 18.00 / 34 (52.9%):  22%|██▏       | 33/150 [00:01<00:04, 26.62it/s]Average Metric: 19.00 / 35 (54.3%):  23%|██▎       | 34/150 [00:01<00:04, 26.62it/s]Average Metric: 20.00 / 36 (55.6%):  23%|██▎       | 35/150 [00:01<00:04, 26.62it/s]Average Metric: 20.00 / 37 (54.1%):  24%|██▍       | 36/150 [00:01<00:04, 26.62it/s]Average Metric: 20.00 / 38 (52.6%):  25%|██▍       | 37/150 [00:01<00:04, 26.62it/s]Average Metric: 20.00 / 39 (51.3%):  25%|██▌       | 38/150 [00:01<00:04, 26.62it/s]Average Metric: 20.00 / 40 (50.0%):  26%|██▌       | 39/150 [00:01<00:04, 26.62it/s]Average Metric: 21.00 / 41 (51.2%):  27%|██▋       | 40/150 [00:01<00:04, 26.62it/s]Average Metric: 21.00 / 42 (50.0%):  27%|██▋       | 41/150 [00:01<00:04, 26.62it/s]Average Metric: 21.00 / 43 (48.8%):  28%|██▊       | 42/150 [00:01<00:04, 26.62it/s]Average Metric: 22.00 / 44 (50.0%):  29%|██▊       | 43/150 [00:01<00:04, 26.62it/s]Average Metric: 23.00 / 45 (51.1%):  29%|██▉       | 44/150 [00:01<00:03, 26.62it/s]Average Metric: 23.00 / 46 (50.0%):  30%|███       | 45/150 [00:01<00:03, 26.62it/s]Average Metric: 24.00 / 47 (51.1%):  31%|███       | 46/150 [00:01<00:03, 26.62it/s]Average Metric: 24.00 / 48 (50.0%):  31%|███▏      | 47/150 [00:01<00:03, 26.62it/s]Average Metric: 24.00 / 48 (50.0%):  32%|███▏      | 48/150 [00:01<00:01, 51.07it/s]Average Metric: 24.00 / 49 (49.0%):  32%|███▏      | 48/150 [00:01<00:01, 51.07it/s]Average Metric: 24.00 / 50 (48.0%):  33%|███▎      | 49/150 [00:01<00:01, 51.07it/s]Average Metric: 25.00 / 51 (49.0%):  33%|███▎      | 50/150 [00:01<00:01, 51.07it/s]Average Metric: 25.00 / 52 (48.1%):  34%|███▍      | 51/150 [00:01<00:01, 51.07it/s]Average Metric: 25.00 / 53 (47.2%):  35%|███▍      | 52/150 [00:01<00:01, 51.07it/s]Average Metric: 25.00 / 54 (46.3%):  35%|███▌      | 53/150 [00:01<00:01, 51.07it/s]Average Metric: 26.00 / 55 (47.3%):  36%|███▌      | 54/150 [00:01<00:01, 51.07it/s]Average Metric: 27.00 / 56 (48.2%):  37%|███▋      | 55/150 [00:01<00:01, 51.07it/s]Average Metric: 28.00 / 57 (49.1%):  37%|███▋      | 56/150 [00:01<00:01, 51.07it/s]Average Metric: 28.00 / 58 (48.3%):  38%|███▊      | 57/150 [00:01<00:01, 51.07it/s]Average Metric: 29.00 / 59 (49.2%):  39%|███▊      | 58/150 [00:01<00:01, 51.07it/s]Average Metric: 29.00 / 60 (48.3%):  39%|███▉      | 59/150 [00:01<00:01, 51.07it/s]Average Metric: 29.00 / 61 (47.5%):  40%|████      | 60/150 [00:01<00:01, 51.07it/s]Average Metric: 29.00 / 62 (46.8%):  41%|████      | 61/150 [00:01<00:01, 51.07it/s]Average Metric: 30.00 / 63 (47.6%):  41%|████▏     | 62/150 [00:01<00:01, 51.07it/s]Average Metric: 31.00 / 64 (48.4%):  42%|████▏     | 63/150 [00:01<00:01, 51.07it/s]Average Metric: 31.00 / 64 (48.4%):  43%|████▎     | 64/150 [00:01<00:01, 63.25it/s]Average Metric: 31.00 / 65 (47.7%):  43%|████▎     | 64/150 [00:01<00:01, 63.25it/s]Average Metric: 32.00 / 66 (48.5%):  43%|████▎     | 65/150 [00:01<00:01, 63.25it/s]Average Metric: 33.00 / 67 (49.3%):  44%|████▍     | 66/150 [00:01<00:01, 63.25it/s]Average Metric: 34.00 / 68 (50.0%):  45%|████▍     | 67/150 [00:01<00:01, 63.25it/s]Average Metric: 35.00 / 69 (50.7%):  45%|████▌     | 68/150 [00:01<00:01, 63.25it/s]Average Metric: 36.00 / 70 (51.4%):  46%|████▌     | 69/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 71 (52.1%):  47%|████▋     | 70/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 72 (51.4%):  47%|████▋     | 71/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 73 (50.7%):  48%|████▊     | 72/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 74 (50.0%):  49%|████▊     | 73/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 75 (49.3%):  49%|████▉     | 74/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 76 (48.7%):  50%|█████     | 75/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 77 (48.1%):  51%|█████     | 76/150 [00:01<00:01, 63.25it/s]Average Metric: 37.00 / 78 (47.4%):  51%|█████▏    | 77/150 [00:01<00:01, 63.25it/s]Average Metric: 38.00 / 79 (48.1%):  52%|█████▏    | 78/150 [00:01<00:01, 63.25it/s]Average Metric: 39.00 / 80 (48.8%):  53%|█████▎    | 79/150 [00:01<00:01, 63.25it/s]Average Metric: 39.00 / 81 (48.1%):  53%|█████▎    | 80/150 [00:01<00:01, 63.25it/s]Average Metric: 39.00 / 82 (47.6%):  54%|█████▍    | 81/150 [00:01<00:01, 63.25it/s]Average Metric: 39.00 / 83 (47.0%):  55%|█████▍    | 82/150 [00:01<00:01, 63.25it/s]Average Metric: 39.00 / 83 (47.0%):  55%|█████▌    | 83/150 [00:01<00:00, 83.35it/s]Average Metric: 40.00 / 84 (47.6%):  55%|█████▌    | 83/150 [00:01<00:00, 83.35it/s]Average Metric: 40.00 / 85 (47.1%):  56%|█████▌    | 84/150 [00:01<00:00, 83.35it/s]Average Metric: 40.00 / 86 (46.5%):  57%|█████▋    | 85/150 [00:01<00:00, 83.35it/s]Average Metric: 41.00 / 87 (47.1%):  57%|█████▋    | 86/150 [00:01<00:00, 83.35it/s]Average Metric: 42.00 / 88 (47.7%):  58%|█████▊    | 87/150 [00:01<00:00, 83.35it/s]Average Metric: 42.00 / 89 (47.2%):  59%|█████▊    | 88/150 [00:01<00:00, 83.35it/s]Average Metric: 42.00 / 90 (46.7%):  59%|█████▉    | 89/150 [00:01<00:00, 83.35it/s]Average Metric: 43.00 / 91 (47.3%):  60%|██████    | 90/150 [00:01<00:00, 83.35it/s]Average Metric: 43.00 / 92 (46.7%):  61%|██████    | 91/150 [00:01<00:00, 83.35it/s]Average Metric: 43.00 / 93 (46.2%):  61%|██████▏   | 92/150 [00:01<00:00, 83.35it/s]Average Metric: 43.00 / 94 (45.7%):  62%|██████▏   | 93/150 [00:01<00:00, 83.35it/s]Average Metric: 43.00 / 95 (45.3%):  63%|██████▎   | 94/150 [00:01<00:00, 83.35it/s]Average Metric: 44.00 / 96 (45.8%):  63%|██████▎   | 95/150 [00:01<00:00, 83.35it/s]Average Metric: 45.00 / 97 (46.4%):  64%|██████▍   | 96/150 [00:01<00:00, 83.35it/s]Average Metric: 45.00 / 98 (45.9%):  65%|██████▍   | 97/150 [00:01<00:00, 83.35it/s]Average Metric: 45.00 / 99 (45.5%):  65%|██████▌   | 98/150 [00:01<00:00, 83.35it/s]Average Metric: 46.00 / 100 (46.0%):  66%|██████▌   | 99/150 [00:01<00:00, 83.35it/s]Average Metric: 47.00 / 101 (46.5%):  67%|██████▋   | 100/150 [00:01<00:00, 83.35it/s]Average Metric: 48.00 / 102 (47.1%):  67%|██████▋   | 101/150 [00:01<00:00, 83.35it/s]Average Metric: 49.00 / 103 (47.6%):  68%|██████▊   | 102/150 [00:01<00:00, 83.35it/s]Average Metric: 49.00 / 103 (47.6%):  69%|██████▊   | 103/150 [00:01<00:00, 104.50it/s]Average Metric: 49.00 / 104 (47.1%):  69%|██████▊   | 103/150 [00:01<00:00, 104.50it/s]Average Metric: 50.00 / 105 (47.6%):  69%|██████▉   | 104/150 [00:01<00:00, 104.50it/s]Average Metric: 50.00 / 106 (47.2%):  70%|███████   | 105/150 [00:01<00:00, 104.50it/s]Average Metric: 51.00 / 107 (47.7%):  71%|███████   | 106/150 [00:01<00:00, 104.50it/s]Average Metric: 52.00 / 108 (48.1%):  71%|███████▏  | 107/150 [00:01<00:00, 104.50it/s]Average Metric: 52.00 / 109 (47.7%):  72%|███████▏  | 108/150 [00:01<00:00, 104.50it/s]Average Metric: 52.00 / 110 (47.3%):  73%|███████▎  | 109/150 [00:01<00:00, 104.50it/s]Average Metric: 52.00 / 111 (46.8%):  73%|███████▎  | 110/150 [00:01<00:00, 104.50it/s]Average Metric: 53.00 / 112 (47.3%):  74%|███████▍  | 111/150 [00:01<00:00, 104.50it/s]Average Metric: 53.00 / 113 (46.9%):  75%|███████▍  | 112/150 [00:01<00:00, 104.50it/s]Average Metric: 54.00 / 114 (47.4%):  75%|███████▌  | 113/150 [00:01<00:00, 104.50it/s]Average Metric: 54.00 / 115 (47.0%):  76%|███████▌  | 114/150 [00:01<00:00, 104.50it/s]Average Metric: 54.00 / 116 (46.6%):  77%|███████▋  | 115/150 [00:01<00:00, 104.50it/s]Average Metric: 55.00 / 117 (47.0%):  77%|███████▋  | 116/150 [00:01<00:00, 104.50it/s]Average Metric: 56.00 / 118 (47.5%):  78%|███████▊  | 117/150 [00:01<00:00, 104.50it/s]Average Metric: 57.00 / 119 (47.9%):  79%|███████▊  | 118/150 [00:01<00:00, 104.50it/s]Average Metric: 57.00 / 120 (47.5%):  79%|███████▉  | 119/150 [00:01<00:00, 104.50it/s]Average Metric: 57.00 / 120 (47.5%):  80%|████████  | 120/150 [00:01<00:00, 117.24it/s]Average Metric: 57.00 / 121 (47.1%):  80%|████████  | 120/150 [00:01<00:00, 117.24it/s]Average Metric: 57.00 / 122 (46.7%):  81%|████████  | 121/150 [00:01<00:00, 117.24it/s]Average Metric: 58.00 / 123 (47.2%):  81%|████████▏ | 122/150 [00:01<00:00, 117.24it/s]Average Metric: 58.00 / 124 (46.8%):  82%|████████▏ | 123/150 [00:01<00:00, 117.24it/s]Average Metric: 58.00 / 125 (46.4%):  83%|████████▎ | 124/150 [00:01<00:00, 117.24it/s]Average Metric: 58.00 / 126 (46.0%):  83%|████████▎ | 125/150 [00:01<00:00, 117.24it/s]Average Metric: 59.00 / 127 (46.5%):  84%|████████▍ | 126/150 [00:01<00:00, 117.24it/s]Average Metric: 60.00 / 128 (46.9%):  85%|████████▍ | 127/150 [00:01<00:00, 117.24it/s]Average Metric: 60.00 / 129 (46.5%):  85%|████████▌ | 128/150 [00:01<00:00, 117.24it/s]Average Metric: 61.00 / 130 (46.9%):  86%|████████▌ | 129/150 [00:01<00:00, 117.24it/s]Average Metric: 61.00 / 131 (46.6%):  87%|████████▋ | 130/150 [00:01<00:00, 117.24it/s]Average Metric: 62.00 / 132 (47.0%):  87%|████████▋ | 131/150 [00:01<00:00, 117.24it/s]Average Metric: 62.00 / 133 (46.6%):  88%|████████▊ | 132/150 [00:01<00:00, 117.24it/s]Average Metric: 62.00 / 134 (46.3%):  89%|████████▊ | 133/150 [00:01<00:00, 117.24it/s]Average Metric: 63.00 / 135 (46.7%):  89%|████████▉ | 134/150 [00:01<00:00, 117.24it/s]Average Metric: 63.00 / 136 (46.3%):  90%|█████████ | 135/150 [00:01<00:00, 117.24it/s]Average Metric: 63.00 / 137 (46.0%):  91%|█████████ | 136/150 [00:01<00:00, 117.24it/s]Average Metric: 64.00 / 138 (46.4%):  91%|█████████▏| 137/150 [00:01<00:00, 117.24it/s]Average Metric: 65.00 / 139 (46.8%):  92%|█████████▏| 138/150 [00:01<00:00, 117.24it/s]Average Metric: 65.00 / 140 (46.4%):  93%|█████████▎| 139/150 [00:01<00:00, 117.24it/s]Average Metric: 65.00 / 141 (46.1%):  93%|█████████▎| 140/150 [00:01<00:00, 117.24it/s]Average Metric: 66.00 / 142 (46.5%):  94%|█████████▍| 141/150 [00:01<00:00, 117.24it/s]Average Metric: 67.00 / 143 (46.9%):  95%|█████████▍| 142/150 [00:02<00:00, 117.24it/s]Average Metric: 67.00 / 143 (46.9%):  95%|█████████▌| 143/150 [00:02<00:00, 142.08it/s]Average Metric: 67.00 / 144 (46.5%):  95%|█████████▌| 143/150 [00:02<00:00, 142.08it/s]Average Metric: 68.00 / 145 (46.9%):  96%|█████████▌| 144/150 [00:02<00:00, 142.08it/s]Average Metric: 68.00 / 146 (46.6%):  97%|█████████▋| 145/150 [00:02<00:00, 142.08it/s]Average Metric: 69.00 / 147 (46.9%):  97%|█████████▋| 146/150 [00:02<00:00, 142.08it/s]Average Metric: 69.00 / 148 (46.6%):  98%|█████████▊| 147/150 [00:02<00:00, 142.08it/s]Average Metric: 70.00 / 149 (47.0%):  99%|█████████▊| 148/150 [00:02<00:00, 142.08it/s]Average Metric: 70.00 / 150 (46.7%):  99%|█████████▉| 149/150 [00:02<00:00, 142.08it/s]Average Metric: 70.00 / 150 (46.7%): 100%|██████████| 150/150 [00:02<00:00, 73.94it/s] 
+                                               problem  example_answer  \
+0    Find the sum of all integer bases $b>9$ for wh...              70   
+1    On $\triangle ABC$ points $A, D, E$, and $B$ l...             588   
+2    The 9 members of a baseball team went to an ic...              16   
+3    Find the number of ordered pairs $(x,y)$, wher...             117   
+4    There are $8!= 40320$ eight-digit positive int...             279   
+5    An isosceles trapezoid has an inscribed circle...             504   
+6    The twelve letters $A$,$B$,$C$,$D$,$E$,$F$,$G$...             821   
+7    Let $k$ be a real number such that the system ...              77   
+8    The parabola with equation $y = x^2 - 4$ is ro...              62   
+9    The $27$ cells of a $3 \times 9$ grid are fill...              81   
+10   A piecewise linear function is defined by \[f(...             259   
+11   The set of points in $3$-dimensional coordinat...             510   
+12   Alex divides a disk into four quadrants with t...             204   
+13   Let $ABCDE$ be a convex pentagon with $AB=14$,...              60   
+14   Let $N$ denote the numbers of ordered triples ...             735   
+15   Six points $A, B, C, D, E$ and $F$ lie in a st...             468   
+16   Find the sum of all positive integers $n$ such...              49   
+17   Four unit squares form a $2\times 2$ grid. Eac...              82   
+18   The product $$\prod_{k=4}^{63} \frac{\log_k \l...             106   
+19   Suppose $\triangle ABC$ has angles $\angle BAC...             336   
+20   Circle $\omega_1$ with radius $6$ centered at ...             293   
+21   Let $A$ be the set of positive integer divisor...             237   
+22   From an unlimited supply of $1$-cent coins, $1...             610   
+23   There are $n$ values of $x$ in the interval $0...             149   
+24   Sixteen chairs are arranged in a row. Eight pe...             907   
+25   Let $S$ be the set of vertices of a regular $2...             113   
+26   Let $A_1 A_2 A_3 \ldots A_{11}$ be an $11$-sid...              19   
+27   Let $x_1, x_2, x_3, \ldots$ be a sequence of r...             248   
+28   Let $\triangle ABC$ be a right triangle with $...             104   
+29   There are exactly three positive real numbers ...             240   
+30   Find the sum of all integer bases $b>9$ for wh...              70   
+31   On $\triangle ABC$ points $A, D, E$, and $B$ l...             588   
+32   The 9 members of a baseball team went to an ic...              16   
+33   Find the number of ordered pairs $(x,y)$, wher...             117   
+34   There are $8!= 40320$ eight-digit positive int...             279   
+35   An isosceles trapezoid has an inscribed circle...             504   
+36   The twelve letters $A$,$B$,$C$,$D$,$E$,$F$,$G$...             821   
+37   Let $k$ be a real number such that the system ...              77   
+38   The parabola with equation $y = x^2 - 4$ is ro...              62   
+39   The $27$ cells of a $3 \times 9$ grid are fill...              81   
+40   A piecewise linear function is defined by \[f(...             259   
+41   The set of points in $3$-dimensional coordinat...             510   
+42   Alex divides a disk into four quadrants with t...             204   
+43   Let $ABCDE$ be a convex pentagon with $AB=14$,...              60   
+44   Let $N$ denote the numbers of ordered triples ...             735   
+45   Six points $A, B, C, D, E$ and $F$ lie in a st...             468   
+46   Find the sum of all positive integers $n$ such...              49   
+47   Four unit squares form a $2\times 2$ grid. Eac...              82   
+48   The product $$\prod_{k=4}^{63} \frac{\log_k \l...             106   
+49   Suppose $\triangle ABC$ has angles $\angle BAC...             336   
+50   Circle $\omega_1$ with radius $6$ centered at ...             293   
+51   Let $A$ be the set of positive integer divisor...             237   
+52   From an unlimited supply of $1$-cent coins, $1...             610   
+53   There are $n$ values of $x$ in the interval $0...             149   
+54   Sixteen chairs are arranged in a row. Eight pe...             907   
+55   Let $S$ be the set of vertices of a regular $2...             113   
+56   Let $A_1 A_2 A_3 \ldots A_{11}$ be an $11$-sid...              19   
+57   Let $x_1, x_2, x_3, \ldots$ be a sequence of r...             248   
+58   Let $\triangle ABC$ be a right triangle with $...             104   
+59   There are exactly three positive real numbers ...             240   
+60   Find the sum of all integer bases $b>9$ for wh...              70   
+61   On $\triangle ABC$ points $A, D, E$, and $B$ l...             588   
+62   The 9 members of a baseball team went to an ic...              16   
+63   Find the number of ordered pairs $(x,y)$, wher...             117   
+64   There are $8!= 40320$ eight-digit positive int...             279   
+65   An isosceles trapezoid has an inscribed circle...             504   
+66   The twelve letters $A$,$B$,$C$,$D$,$E$,$F$,$G$...             821   
+67   Let $k$ be a real number such that the system ...              77   
+68   The parabola with equation $y = x^2 - 4$ is ro...              62   
+69   The $27$ cells of a $3 \times 9$ grid are fill...              81   
+70   A piecewise linear function is defined by \[f(...             259   
+71   The set of points in $3$-dimensional coordinat...             510   
+72   Alex divides a disk into four quadrants with t...             204   
+73   Let $ABCDE$ be a convex pentagon with $AB=14$,...              60   
+74   Let $N$ denote the numbers of ordered triples ...             735   
+75   Six points $A, B, C, D, E$ and $F$ lie in a st...             468   
+76   Find the sum of all positive integers $n$ such...              49   
+77   Four unit squares form a $2\times 2$ grid. Eac...              82   
+78   The product $$\prod_{k=4}^{63} \frac{\log_k \l...             106   
+79   Suppose $\triangle ABC$ has angles $\angle BAC...             336   
+80   Circle $\omega_1$ with radius $6$ centered at ...             293   
+81   Let $A$ be the set of positive integer divisor...             237   
+82   From an unlimited supply of $1$-cent coins, $1...             610   
+83   There are $n$ values of $x$ in the interval $0...             149   
+84   Sixteen chairs are arranged in a row. Eight pe...             907   
+85   Let $S$ be the set of vertices of a regular $2...             113   
+86   Let $A_1 A_2 A_3 \ldots A_{11}$ be an $11$-sid...              19   
+87   Let $x_1, x_2, x_3, \ldots$ be a sequence of r...             248   
+88   Let $\triangle ABC$ be a right triangle with $...             104   
+89   There are exactly three positive real numbers ...             240   
+90   Find the sum of all integer bases $b>9$ for wh...              70   
+91   On $\triangle ABC$ points $A, D, E$, and $B$ l...             588   
+92   The 9 members of a baseball team went to an ic...              16   
+93   Find the number of ordered pairs $(x,y)$, wher...             117   
+94   There are $8!= 40320$ eight-digit positive int...             279   
+95   An isosceles trapezoid has an inscribed circle...             504   
+96   The twelve letters $A$,$B$,$C$,$D$,$E$,$F$,$G$...             821   
+97   Let $k$ be a real number such that the system ...              77   
+98   The parabola with equation $y = x^2 - 4$ is ro...              62   
+99   The $27$ cells of a $3 \times 9$ grid are fill...              81   
+100  A piecewise linear function is defined by \[f(...             259   
+101  The set of points in $3$-dimensional coordinat...             510   
+102  Alex divides a disk into four quadrants with t...             204   
+103  Let $ABCDE$ be a convex pentagon with $AB=14$,...              60   
+104  Let $N$ denote the numbers of ordered triples ...             735   
+105  Six points $A, B, C, D, E$ and $F$ lie in a st...             468   
+106  Find the sum of all positive integers $n$ such...              49   
+107  Four unit squares form a $2\times 2$ grid. Eac...              82   
+108  The product $$\prod_{k=4}^{63} \frac{\log_k \l...             106   
+109  Suppose $\triangle ABC$ has angles $\angle BAC...             336   
+110  Circle $\omega_1$ with radius $6$ centered at ...             293   
+111  Let $A$ be the set of positive integer divisor...             237   
+112  From an unlimited supply of $1$-cent coins, $1...             610   
+113  There are $n$ values of $x$ in the interval $0...             149   
+114  Sixteen chairs are arranged in a row. Eight pe...             907   
+115  Let $S$ be the set of vertices of a regular $2...             113   
+116  Let $A_1 A_2 A_3 \ldots A_{11}$ be an $11$-sid...              19   
+117  Let $x_1, x_2, x_3, \ldots$ be a sequence of r...             248   
+118  Let $\triangle ABC$ be a right triangle with $...             104   
+119  There are exactly three positive real numbers ...             240   
+120  Find the sum of all integer bases $b>9$ for wh...              70   
+121  On $\triangle ABC$ points $A, D, E$, and $B$ l...             588   
+122  The 9 members of a baseball team went to an ic...              16   
+123  Find the number of ordered pairs $(x,y)$, wher...             117   
+124  There are $8!= 40320$ eight-digit positive int...             279   
+125  An isosceles trapezoid has an inscribed circle...             504   
+126  The twelve letters $A$,$B$,$C$,$D$,$E$,$F$,$G$...             821   
+127  Let $k$ be a real number such that the system ...              77   
+128  The parabola with equation $y = x^2 - 4$ is ro...              62   
+129  The $27$ cells of a $3 \times 9$ grid are fill...              81   
+130  A piecewise linear function is defined by \[f(...             259   
+131  The set of points in $3$-dimensional coordinat...             510   
+132  Alex divides a disk into four quadrants with t...             204   
+133  Let $ABCDE$ be a convex pentagon with $AB=14$,...              60   
+134  Let $N$ denote the numbers of ordered triples ...             735   
+135  Six points $A, B, C, D, E$ and $F$ lie in a st...             468   
+136  Find the sum of all positive integers $n$ such...              49   
+137  Four unit squares form a $2\times 2$ grid. Eac...              82   
+138  The product $$\prod_{k=4}^{63} \frac{\log_k \l...             106   
+139  Suppose $\triangle ABC$ has angles $\angle BAC...             336   
+140  Circle $\omega_1$ with radius $6$ centered at ...             293   
+141  Let $A$ be the set of positive integer divisor...             237   
+142  From an unlimited supply of $1$-cent coins, $1...             610   
+143  There are $n$ values of $x$ in the interval $0...             149   
+144  Sixteen chairs are arranged in a row. Eight pe...             907   
+145  Let $S$ be the set of vertices of a regular $2...             113   
+146  Let $A_1 A_2 A_3 \ldots A_{11}$ be an $11$-sid...              19   
+147  Let $x_1, x_2, x_3, \ldots$ be a sequence of r...             248   
+148  Let $\triangle ABC$ be a right triangle with $...             104   
+149  There are exactly three positive real numbers ...             240   
+
+                                             reasoning      pred_answer  \
+0    First, translate the given numbers from base \...               70   
+1    We start by understanding the given configurat...              588   
+2    We have 9 players, each choosing one of three ...               16   
+3    We want to find the number of ordered pairs \(...              117   
+4    We want to count the number \(N\) of 8-digit n...              279   
+5    We have an isosceles trapezoid with an inscrib...              504   
+6    We have 12 letters: A, B, C, D, E, F, G, H, I,...               12   
+7    We are given a system of equations involving a...               77   
+8    The original parabola is given by: \[ y = x^2 ...               84   
+9    This problem describes filling a \(3 \times 9\...               86   
+10   The given function \( f(x) \) is piecewise lin...             1504   
+11   First, let's analyze the problem step-by-step:...             2031   
+12   First, let’s understand the setup: - Initially...  \(\boxed{148}\)   
+13   We are given a convex pentagon \(ABCDE\) with ...               89   
+14   We are given the problem: Let \(N\) denote the...               49   
+15   We are given six collinear points \(A, B, C, D...              468   
+16   We want to find all positive integers \( n \) ...               49   
+17   We have a 2x2 grid of unit squares, so there a...               82   
+18   We are given the product \[ \prod_{k=4}^{63} \...              106   
+19   We start with \(\triangle ABC\) having angles ...              264   
+20   We are given two circles \(\omega_1\) and \(\o...              293   
+21   First, let's understand the problem and what i...              279   
+22   We have coins of denominations 1, 10, and 25 c...              808   
+23   We have the function: \[ f(x) = \sin\left(7\pi...              139   
+24   We have 16 chairs in a row: \( C_1, C_2, \ldot...              907   
+25   We have a regular 24-gon with vertex set \(S\)...               12   
+26   We are given an 11-sided polygon \( A_1 A_2 \l...               19   
+27   We are given the sequence \((x_n)\) defined by...              106   
+28   Given a right triangle \( \triangle ABC \) wit...              100   
+29   We are given the function \[ f(x) = \frac{(x -...              188   
+30   First, translate the given numbers from base \...               70   
+31   We start by understanding the given configurat...              588   
+32   We have 9 players, each choosing one of three ...               16   
+33   We want to find the number of ordered pairs \(...              117   
+34   We want to count the number \(N\) of 8-digit n...              279   
+35   We have an isosceles trapezoid with an inscrib...              504   
+36   We have 12 letters: A, B, C, D, E, F, G, H, I,...               12   
+37   We are given a system of equations involving a...               77   
+38   The original parabola is given by: \[ y = x^2 ...               84   
+39   This problem describes filling a \(3 \times 9\...               86   
+40   The given function \( f(x) \) is piecewise lin...             1504   
+41   First, let's analyze the problem step-by-step:...             2031   
+42   First, let’s understand the setup: - Initially...  \(\boxed{148}\)   
+43   We are given a convex pentagon \(ABCDE\) with ...               89   
+44   We are given the problem: Let \(N\) denote the...               49   
+45   We are given six collinear points \(A, B, C, D...              468   
+46   We want to find all positive integers \( n \) ...               49   
+47   We have a 2x2 grid of unit squares, so there a...               82   
+48   We are given the product \[ \prod_{k=4}^{63} \...              106   
+49   We start with \(\triangle ABC\) having angles ...              264   
+50   We are given two circles \(\omega_1\) and \(\o...              293   
+51   First, let's understand the problem and what i...              279   
+52   We have coins of denominations 1, 10, and 25 c...              808   
+53   We have the function: \[ f(x) = \sin\left(7\pi...              139   
+54   We have 16 chairs in a row: \( C_1, C_2, \ldot...              907   
+55   We have a regular 24-gon with vertex set \(S\)...               12   
+56   We are given an 11-sided polygon \( A_1 A_2 \l...               19   
+57   We are given the sequence \((x_n)\) defined by...              106   
+58   Given a right triangle \( \triangle ABC \) wit...              100   
+59   We are given the function \[ f(x) = \frac{(x -...              188   
+60   First, translate the given numbers from base \...               70   
+61   We start by understanding the given configurat...              588   
+62   We have 9 players, each choosing one of three ...               16   
+63   We want to find the number of ordered pairs \(...              117   
+64   We want to count the number \(N\) of 8-digit n...              279   
+65   We have an isosceles trapezoid with an inscrib...              504   
+66   We have 12 letters: A, B, C, D, E, F, G, H, I,...               12   
+67   We are given a system of equations involving a...               77   
+68   The original parabola is given by: \[ y = x^2 ...               84   
+69   This problem describes filling a \(3 \times 9\...               86   
+70   The given function \( f(x) \) is piecewise lin...             1504   
+71   First, let's analyze the problem step-by-step:...             2031   
+72   First, let’s understand the setup: - Initially...  \(\boxed{148}\)   
+73   We are given a convex pentagon \(ABCDE\) with ...               89   
+74   We are given the problem: Let \(N\) denote the...               49   
+75   We are given six collinear points \(A, B, C, D...              468   
+76   We want to find all positive integers \( n \) ...               49   
+77   We have a 2x2 grid of unit squares, so there a...               82   
+78   We are given the product \[ \prod_{k=4}^{63} \...              106   
+79   We start with \(\triangle ABC\) having angles ...              264   
+80   We are given two circles \(\omega_1\) and \(\o...              293   
+81   First, let's understand the problem and what i...              279   
+82   We have coins of denominations 1, 10, and 25 c...              808   
+83   We have the function: \[ f(x) = \sin\left(7\pi...              139   
+84   We have 16 chairs in a row: \( C_1, C_2, \ldot...              907   
+85   We have a regular 24-gon with vertex set \(S\)...               12   
+86   We are given an 11-sided polygon \( A_1 A_2 \l...               19   
+87   We are given the sequence \((x_n)\) defined by...              106   
+88   Given a right triangle \( \triangle ABC \) wit...              100   
+89   We are given the function \[ f(x) = \frac{(x -...              188   
+90   First, translate the given numbers from base \...               70   
+91   We start by understanding the given configurat...              588   
+92   We have 9 players, each choosing one of three ...               16   
+93   We want to find the number of ordered pairs \(...              117   
+94   We want to count the number \(N\) of 8-digit n...              279   
+95   We have an isosceles trapezoid with an inscrib...              504   
+96   We have 12 letters: A, B, C, D, E, F, G, H, I,...               12   
+97   We are given a system of equations involving a...               77   
+98   The original parabola is given by: \[ y = x^2 ...               84   
+99   This problem describes filling a \(3 \times 9\...               86   
+100  The given function \( f(x) \) is piecewise lin...             1504   
+101  First, let's analyze the problem step-by-step:...             2031   
+102  First, let’s understand the setup: - Initially...  \(\boxed{148}\)   
+103  We are given a convex pentagon \(ABCDE\) with ...               89   
+104  We are given the problem: Let \(N\) denote the...               49   
+105  We are given six collinear points \(A, B, C, D...              468   
+106  We want to find all positive integers \( n \) ...               49   
+107  We have a 2x2 grid of unit squares, so there a...               82   
+108  We are given the product \[ \prod_{k=4}^{63} \...              106   
+109  We start with \(\triangle ABC\) having angles ...              264   
+110  We are given two circles \(\omega_1\) and \(\o...              293   
+111  First, let's understand the problem and what i...              279   
+112  We have coins of denominations 1, 10, and 25 c...              808   
+113  We have the function: \[ f(x) = \sin\left(7\pi...              139   
+114  We have 16 chairs in a row: \( C_1, C_2, \ldot...              907   
+115  We have a regular 24-gon with vertex set \(S\)...               12   
+116  We are given an 11-sided polygon \( A_1 A_2 \l...               19   
+117  We are given the sequence \((x_n)\) defined by...              106   
+118  Given a right triangle \( \triangle ABC \) wit...              100   
+119  We are given the function \[ f(x) = \frac{(x -...              188   
+120  First, translate the given numbers from base \...               70   
+121  We start by understanding the given configurat...              588   
+122  We have 9 players, each choosing one of three ...               16   
+123  We want to find the number of ordered pairs \(...              117   
+124  We want to count the number \(N\) of 8-digit n...              279   
+125  We have an isosceles trapezoid with an inscrib...              504   
+126  We have 12 letters: A, B, C, D, E, F, G, H, I,...               12   
+127  We are given a system of equations involving a...               77   
+128  The original parabola is given by: \[ y = x^2 ...               84   
+129  This problem describes filling a \(3 \times 9\...               86   
+130  The given function \( f(x) \) is piecewise lin...             1504   
+131  First, let's analyze the problem step-by-step:...             2031   
+132  First, let’s understand the setup: - Initially...  \(\boxed{148}\)   
+133  We are given a convex pentagon \(ABCDE\) with ...               89   
+134  We are given the problem: Let \(N\) denote the...               49   
+135  We are given six collinear points \(A, B, C, D...              468   
+136  We want to find all positive integers \( n \) ...               49   
+137  We have a 2x2 grid of unit squares, so there a...               82   
+138  We are given the product \[ \prod_{k=4}^{63} \...              106   
+139  We start with \(\triangle ABC\) having angles ...              264   
+140  We are given two circles \(\omega_1\) and \(\o...              293   
+141  First, let's understand the problem and what i...              279   
+142  We have coins of denominations 1, 10, and 25 c...              808   
+143  We have the function: \[ f(x) = \sin\left(7\pi...              139   
+144  We have 16 chairs in a row: \( C_1, C_2, \ldot...              907   
+145  We have a regular 24-gon with vertex set \(S\)...               12   
+146  We are given an 11-sided polygon \( A_1 A_2 \l...               19   
+147  We are given the sequence \((x_n)\) defined by...              106   
+148  Given a right triangle \( \triangle ABC \) wit...              100   
+149  We are given the function \[ f(x) = \frac{(x -...              188   
+
+    wrapper  
+0    ✔️ [1]  
+1    ✔️ [1]  
+2    ✔️ [1]  
+3    ✔️ [1]  
+4    ✔️ [1]  
+5    ✔️ [1]  
+6    ✔️ [0]  
+7    ✔️ [1]  
+8    ✔️ [0]  
+9    ✔️ [0]  
+10   ✔️ [0]  
+11   ✔️ [0]  
+12   ✔️ [0]  
+13   ✔️ [0]  
+14   ✔️ [0]  
+15   ✔️ [1]  
+16   ✔️ [1]  
+17   ✔️ [1]  
+18   ✔️ [1]  
+19   ✔️ [0]  
+20   ✔️ [1]  
+21   ✔️ [0]  
+22   ✔️ [0]  
+23   ✔️ [0]  
+24   ✔️ [1]  
+25   ✔️ [0]  
+26   ✔️ [1]  
+27   ✔️ [0]  
+28   ✔️ [0]  
+29   ✔️ [0]  
+30   ✔️ [1]  
+31   ✔️ [1]  
+32   ✔️ [1]  
+33   ✔️ [1]  
+34   ✔️ [1]  
+35   ✔️ [1]  
+36   ✔️ [0]  
+37   ✔️ [1]  
+38   ✔️ [0]  
+39   ✔️ [0]  
+40   ✔️ [0]  
+41   ✔️ [0]  
+42   ✔️ [0]  
+43   ✔️ [0]  
+44   ✔️ [0]  
+45   ✔️ [1]  
+46   ✔️ [1]  
+47   ✔️ [1]  
+48   ✔️ [1]  
+49   ✔️ [0]  
+50   ✔️ [1]  
+51   ✔️ [0]  
+52   ✔️ [0]  
+53   ✔️ [0]  
+54   ✔️ [1]  
+55   ✔️ [0]  
+56   ✔️ [1]  
+57   ✔️ [0]  
+58   ✔️ [0]  
+59   ✔️ [0]  
+60   ✔️ [1]  
+61   ✔️ [1]  
+62   ✔️ [1]  
+63   ✔️ [1]  
+64   ✔️ [1]  
+65   ✔️ [1]  
+66   ✔️ [0]  
+67   ✔️ [1]  
+68   ✔️ [0]  
+69   ✔️ [0]  
+70   ✔️ [0]  
+71   ✔️ [0]  
+72   ✔️ [0]  
+73   ✔️ [0]  
+74   ✔️ [0]  
+75   ✔️ [1]  
+76   ✔️ [1]  
+77   ✔️ [1]  
+78   ✔️ [1]  
+79   ✔️ [0]  
+80   ✔️ [1]  
+81   ✔️ [0]  
+82   ✔️ [0]  
+83   ✔️ [0]  
+84   ✔️ [1]  
+85   ✔️ [0]  
+86   ✔️ [1]  
+87   ✔️ [0]  
+88   ✔️ [0]  
+89   ✔️ [0]  
+90   ✔️ [1]  
+91   ✔️ [1]  
+92   ✔️ [1]  
+93   ✔️ [1]  
+94   ✔️ [1]  
+95   ✔️ [1]  
+96   ✔️ [0]  
+97   ✔️ [1]  
+98   ✔️ [0]  
+99   ✔️ [0]  
+100  ✔️ [0]  
+101  ✔️ [0]  
+102  ✔️ [0]  
+103  ✔️ [0]  
+104  ✔️ [0]  
+105  ✔️ [1]  
+106  ✔️ [1]  
+107  ✔️ [1]  
+108  ✔️ [1]  
+109  ✔️ [0]  
+110  ✔️ [1]  
+111  ✔️ [0]  
+112  ✔️ [0]  
+113  ✔️ [0]  
+114  ✔️ [1]  
+115  ✔️ [0]  
+116  ✔️ [1]  
+117  ✔️ [0]  
+118  ✔️ [0]  
+119  ✔️ [0]  
+120  ✔️ [1]  
+121  ✔️ [1]  
+122  ✔️ [1]  
+123  ✔️ [1]  
+124  ✔️ [1]  
+125  ✔️ [1]  
+126  ✔️ [0]  
+127  ✔️ [1]  
+128  ✔️ [0]  
+129  ✔️ [0]  
+130  ✔️ [0]  
+131  ✔️ [0]  
+132  ✔️ [0]  
+133  ✔️ [0]  
+134  ✔️ [0]  
+135  ✔️ [1]  
+136  ✔️ [1]  
+137  ✔️ [1]  
+138  ✔️ [1]  
+139  ✔️ [0]  
+140  ✔️ [1]  
+141  ✔️ [0]  
+142  ✔️ [0]  
+143  ✔️ [0]  
+144  ✔️ [1]  
+145  ✔️ [0]  
+146  ✔️ [1]  
+147  ✔️ [0]  
+148  ✔️ [0]  
+149  ✔️ [0]  
+  [TEST_BASELINE Q#0] score=1 | llm=588 correct=588
+  [TEST_BASELINE Q#1] score=0 | llm=49 correct=735
+  [TEST_BASELINE Q#2] score=1 | llm=70 correct=70
+  [TEST_BASELINE Q#3] score=0 | llm=808 correct=610
+  [TEST_BASELINE Q#4] score=1 | llm=907 correct=907
+  [TEST_BASELINE Q#5] score=0 | llm=100 correct=104
+  [TEST_BASELINE Q#6] score=1 | llm=588 correct=588
+  [TEST_BASELINE Q#7] score=0 | llm=2031 correct=510
+  [TEST_BASELINE Q#8] score=1 | llm=19 correct=19
+  [TEST_BASELINE Q#9] score=0 | llm=86 correct=81
+  [TEST_BASELINE Q#10] score=1 | llm=468 correct=468
+  [TEST_BASELINE Q#11] score=1 | llm=106 correct=106
+  [TEST_BASELINE Q#12] score=0 | llm=106 correct=248
+  [TEST_BASELINE Q#13] score=1 | llm=82 correct=82
+  [TEST_BASELINE Q#14] score=0 | llm=12 correct=113
+  [TEST_BASELINE Q#15] score=1 | llm=77 correct=77
+  [TEST_BASELINE Q#16] score=0 | llm=84 correct=62
+  [TEST_BASELINE Q#17] score=0 | llm=279 correct=237
+  [TEST_BASELINE Q#18] score=1 | llm=49 correct=49
+  [TEST_BASELINE Q#19] score=0 | llm=264 correct=336
+  [TEST_BASELINE Q#20] score=1 | llm=70 correct=70
+  [TEST_BASELINE Q#21] score=1 | llm=279 correct=279
+  [TEST_BASELINE Q#22] score=1 | llm=117 correct=117
+  [TEST_BASELINE Q#23] score=0 | llm=139 correct=149
+  [TEST_BASELINE Q#24] score=0 | llm=188 correct=240
+  [TEST_BASELINE Q#25] score=1 | llm=504 correct=504
+  [TEST_BASELINE Q#26] score=0 | llm=148 correct=204
+  [TEST_BASELINE Q#27] score=1 | llm=16 correct=16
+  [TEST_BASELINE Q#28] score=0 | llm=1504 correct=259
+  [TEST_BASELINE Q#29] score=1 | llm=279 correct=279
+  [TEST_BASELINE Q#30] score=1 | llm=117 correct=117
+  [TEST_BASELINE Q#31] score=1 | llm=16 correct=16
+  [TEST_BASELINE Q#32] score=0 | llm=49 correct=735
+  [TEST_BASELINE Q#33] score=0 | llm=12 correct=821
+  [TEST_BASELINE Q#34] score=1 | llm=77 correct=77
+  [TEST_BASELINE Q#35] score=1 | llm=106 correct=106
+  [TEST_BASELINE Q#36] score=0 | llm=106 correct=248
+  [TEST_BASELINE Q#37] score=0 | llm=89 correct=60
+  [TEST_BASELINE Q#38] score=0 | llm=86 correct=81
+  [TEST_BASELINE Q#39] score=0 | llm=89 correct=60
+  [TEST_BASELINE Q#40] score=0 | llm=808 correct=610
+  [TEST_BASELINE Q#41] score=1 | llm=504 correct=504
+  [TEST_BASELINE Q#42] score=0 | llm=12 correct=113
+  [TEST_BASELINE Q#43] score=0 | llm=1504 correct=259
+  [TEST_BASELINE Q#44] score=1 | llm=82 correct=82
+  [TEST_BASELINE Q#45] score=1 | llm=293 correct=293
+  [TEST_BASELINE Q#46] score=1 | llm=49 correct=49
+  [TEST_BASELINE Q#47] score=0 | llm=148 correct=204
+  [TEST_BASELINE Q#48] score=1 | llm=468 correct=468
+  [TEST_BASELINE Q#49] score=0 | llm=2031 correct=510
+  [TEST_BASELINE Q#50] score=0 | llm=279 correct=237
+  [TEST_BASELINE Q#51] score=0 | llm=84 correct=62
+  [TEST_BASELINE Q#52] score=0 | llm=12 correct=821
+  [TEST_BASELINE Q#53] score=0 | llm=264 correct=336
+  [TEST_BASELINE Q#54] score=1 | llm=279 correct=279
+  [TEST_BASELINE Q#55] score=1 | llm=907 correct=907
+  [TEST_BASELINE Q#56] score=1 | llm=117 correct=117
+  [TEST_BASELINE Q#57] score=1 | llm=588 correct=588
+  [TEST_BASELINE Q#58] score=0 | llm=100 correct=104
+  [TEST_BASELINE Q#59] score=0 | llm=139 correct=149
+  [TEST_BASELINE Q#60] score=0 | llm=84 correct=62
+  [TEST_BASELINE Q#61] score=0 | llm=89 correct=60
+  [TEST_BASELINE Q#62] score=1 | llm=19 correct=19
+  [TEST_BASELINE Q#63] score=0 | llm=86 correct=81
+  [TEST_BASELINE Q#64] score=1 | llm=468 correct=468
+  [TEST_BASELINE Q#65] score=1 | llm=293 correct=293
+  [TEST_BASELINE Q#66] score=1 | llm=16 correct=16
+  [TEST_BASELINE Q#67] score=1 | llm=77 correct=77
+  [TEST_BASELINE Q#68] score=1 | llm=70 correct=70
+  [TEST_BASELINE Q#69] score=1 | llm=49 correct=49
+  [TEST_BASELINE Q#70] score=0 | llm=188 correct=240
+  [TEST_BASELINE Q#71] score=1 | llm=504 correct=504
+  [TEST_BASELINE Q#72] score=0 | llm=1504 correct=259
+  [TEST_BASELINE Q#73] score=0 | llm=49 correct=735
+  [TEST_BASELINE Q#74] score=1 | llm=82 correct=82
+  [TEST_BASELINE Q#75] score=0 | llm=148 correct=204
+  [TEST_BASELINE Q#76] score=1 | llm=293 correct=293
+  [TEST_BASELINE Q#77] score=0 | llm=808 correct=610
+  [TEST_BASELINE Q#78] score=0 | llm=2031 correct=510
+  [TEST_BASELINE Q#79] score=0 | llm=12 correct=821
+  [TEST_BASELINE Q#80] score=0 | llm=264 correct=336
+  [TEST_BASELINE Q#81] score=0 | llm=100 correct=104
+  [TEST_BASELINE Q#82] score=1 | llm=19 correct=19
+  [TEST_BASELINE Q#83] score=0 | llm=2031 correct=510
+  [TEST_BASELINE Q#84] score=0 | llm=139 correct=149
+  [TEST_BASELINE Q#85] score=0 | llm=106 correct=248
+  [TEST_BASELINE Q#86] score=0 | llm=12 correct=113
+  [TEST_BASELINE Q#87] score=1 | llm=77 correct=77
+  [TEST_BASELINE Q#88] score=0 | llm=86 correct=81
+  [TEST_BASELINE Q#89] score=1 | llm=504 correct=504
+  [TEST_BASELINE Q#90] score=1 | llm=907 correct=907
+  [TEST_BASELINE Q#91] score=0 | llm=279 correct=237
+  [TEST_BASELINE Q#92] score=0 | llm=188 correct=240
+  [TEST_BASELINE Q#93] score=0 | llm=84 correct=62
+  [TEST_BASELINE Q#94] score=1 | llm=106 correct=106
+  [TEST_BASELINE Q#95] score=1 | llm=293 correct=293
+  [TEST_BASELINE Q#96] score=0 | llm=89 correct=60
+  [TEST_BASELINE Q#97] score=0 | llm=1504 correct=259
+  [TEST_BASELINE Q#98] score=0 | llm=12 correct=821
+  [TEST_BASELINE Q#99] score=1 | llm=70 correct=70
+  [TEST_BASELINE Q#100] score=1 | llm=77 correct=77
+  [TEST_BASELINE Q#101] score=1 | llm=82 correct=82
+  [TEST_BASELINE Q#102] score=0 | llm=148 correct=204
+  [TEST_BASELINE Q#103] score=1 | llm=106 correct=106
+  [TEST_BASELINE Q#104] score=1 | llm=117 correct=117
+  [TEST_BASELINE Q#105] score=0 | llm=188 correct=240
+  [TEST_BASELINE Q#106] score=1 | llm=468 correct=468
+  [TEST_BASELINE Q#107] score=1 | llm=279 correct=279
+  [TEST_BASELINE Q#108] score=0 | llm=264 correct=336
+  [TEST_BASELINE Q#109] score=0 | llm=1504 correct=259
+  [TEST_BASELINE Q#110] score=0 | llm=808 correct=610
+  [TEST_BASELINE Q#111] score=1 | llm=16 correct=16
+  [TEST_BASELINE Q#112] score=1 | llm=907 correct=907
+  [TEST_BASELINE Q#113] score=0 | llm=100 correct=104
+  [TEST_BASELINE Q#114] score=0 | llm=49 correct=735
+  [TEST_BASELINE Q#115] score=0 | llm=279 correct=237
+  [TEST_BASELINE Q#116] score=1 | llm=16 correct=16
+  [TEST_BASELINE Q#117] score=1 | llm=588 correct=588
+  [TEST_BASELINE Q#118] score=1 | llm=49 correct=49
+  [TEST_BASELINE Q#119] score=0 | llm=86 correct=81
+  [TEST_BASELINE Q#120] score=0 | llm=106 correct=248
+  [TEST_BASELINE Q#121] score=0 | llm=139 correct=149
+  [TEST_BASELINE Q#122] score=0 | llm=12 correct=113
+  [TEST_BASELINE Q#123] score=1 | llm=279 correct=279
+  [TEST_BASELINE Q#124] score=0 | llm=139 correct=149
+  [TEST_BASELINE Q#125] score=1 | llm=588 correct=588
+  [TEST_BASELINE Q#126] score=0 | llm=12 correct=821
+  [TEST_BASELINE Q#127] score=1 | llm=117 correct=117
+  [TEST_BASELINE Q#128] score=0 | llm=106 correct=248
+  [TEST_BASELINE Q#129] score=0 | llm=148 correct=204
+  [TEST_BASELINE Q#130] score=1 | llm=70 correct=70
+  [TEST_BASELINE Q#131] score=0 | llm=2031 correct=510
+  [TEST_BASELINE Q#132] score=1 | llm=504 correct=504
+  [TEST_BASELINE Q#133] score=0 | llm=12 correct=113
+  [TEST_BASELINE Q#134] score=1 | llm=468 correct=468
+  [TEST_BASELINE Q#135] score=0 | llm=264 correct=336
+  [TEST_BASELINE Q#136] score=1 | llm=82 correct=82
+  [TEST_BASELINE Q#137] score=1 | llm=49 correct=49
+  [TEST_BASELINE Q#138] score=0 | llm=89 correct=60
+  [TEST_BASELINE Q#139] score=0 | llm=279 correct=237
+  [TEST_BASELINE Q#140] score=0 | llm=49 correct=735
+  [TEST_BASELINE Q#141] score=1 | llm=19 correct=19
+  [TEST_BASELINE Q#142] score=1 | llm=19 correct=19
+  [TEST_BASELINE Q#143] score=0 | llm=84 correct=62
+  [TEST_BASELINE Q#144] score=1 | llm=293 correct=293
+  [TEST_BASELINE Q#145] score=0 | llm=100 correct=104
+  [TEST_BASELINE Q#146] score=1 | llm=106 correct=106
+  [TEST_BASELINE Q#147] score=0 | llm=808 correct=610
+  [TEST_BASELINE Q#148] score=1 | llm=907 correct=907
+  [TEST_BASELINE Q#149] score=0 | llm=188 correct=240
+
+  [TEST_BASELINE SUMMARY] 70/150 correct (0.4667)
+
+================================================================================
+GEPA OPTIMIZATION START
+================================================================================
+  Train: 45  |  Val: 45
+  Components: ['predict']
+  Seed prompt (63 chars):
+    Solve the problem and provide the answer in the correct format.
+================================================================================
+Iteration 0: Base program full valset score: 0.5111111111111111 over 45 / 45 examples
+
+  [SEED VALSET] score=0.5111  (23/45 correct)
+    - val[0] = 0.0
+    + val[1] = 1.0
+    + val[10] = 1.0
+    - val[11] = 0.0
+    + val[12] = 1.0
+    - val[13] = 0.0
+    + val[14] = 1.0
+    - val[15] = 0.0
+    - val[16] = 0.0
+    + val[17] = 1.0
+    - val[18] = 0.0
+    + val[19] = 1.0
+    - val[2] = 0.0
+    + val[20] = 1.0
+    + val[21] = 1.0
+    + val[22] = 1.0
+    - val[23] = 0.0
+    + val[24] = 1.0
+    - val[25] = 0.0
+    + val[26] = 1.0
+    + val[27] = 1.0
+    - val[28] = 0.0
+    - val[29] = 0.0
+    + val[3] = 1.0
+    - val[30] = 0.0
+    + val[31] = 1.0
+    - val[32] = 0.0
+    + val[33] = 1.0
+    + val[34] = 1.0
+    + val[35] = 1.0
+    - val[36] = 0.0
+    + val[37] = 1.0
+    + val[38] = 1.0
+    - val[39] = 0.0
+    + val[4] = 1.0
+    - val[40] = 0.0
+    - val[41] = 0.0
+    - val[42] = 0.0
+    - val[43] = 0.0
+    - val[44] = 0.0
+    + val[5] = 1.0
+    - val[6] = 0.0
+    + val[7] = 1.0
+    + val[8] = 1.0
+    - val[9] = 0.0
+  [VAL QUESTIONS iter=0 cand=#0] 23/45 correct (0.5111) -- 45 questions logged
+  [STATE SAVED] run_dir=outputs/aime_math_baseline
+
+--- Iteration 1 -------------------------------------------------------------
+Iteration 1: Selected program 0 score: 0.5111111111111111
+  [PARENT] Candidate #0  (val score: 0.5111)
+    predict (63 chars): Solve the problem and provide the answer in the correct format.
+  [MINIBATCH] ids=[1, 27, 35]  (3 of 45 train)
+  [EVAL PARENT START] candidate=#0  batch_size=3 +traces
+  0%|          | 0/3 [00:00<?, ?it/s]Average Metric: 1.00 / 1 (100.0%):   0%|          | 0/3 [00:14<?, ?it/s]Average Metric: 1.00 / 1 (100.0%):  33%|###3      | 1/3 [00:14<00:28, 14.32s/it]Average Metric: 1.00 / 2 (50.0%):  33%|###3      | 1/3 [01:11<00:28, 14.32s/it] Average Metric: 1.00 / 2 (50.0%):  67%|######6   | 2/3 [01:11<00:39, 39.61s/it]Average Metric: 2.00 / 3 (66.7%):  67%|######6   | 2/3 [01:13<00:39, 39.61s/it]Average Metric: 2.00 / 3 (66.7%): 100%|##########| 3/3 [01:13<00:00, 22.35s/it]Average Metric: 2.00 / 3 (66.7%): 100%|##########| 3/3 [01:13<00:00, 24.48s/it]
