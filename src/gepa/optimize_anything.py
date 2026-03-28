@@ -818,6 +818,7 @@ class GEPAConfig:
 
     # Complex callbacks that aren't serializable
     stop_callbacks: StopperProtocol | Sequence[StopperProtocol] | None = None
+    callbacks: list[Any] | None = None
 
     def __post_init__(self):
         """Handle dicts passed in (e.g., from a JSON/YAML file)."""
@@ -1421,6 +1422,7 @@ def optimize_anything(
         reflection_lm=config.reflection.reflection_lm,
         reflection_prompt_template=config.reflection.reflection_prompt_template,
         custom_candidate_proposer=config.reflection.custom_candidate_proposer,
+        callbacks=config.callbacks,
     )
 
     # Define evaluator function for merge proposer
@@ -1465,6 +1467,7 @@ def optimize_anything(
         display_progress_bar=config.engine.display_progress_bar,
         raise_on_exception=config.engine.raise_on_exception,
         stop_callback=stop_callback,
+        callbacks=config.callbacks,
         val_evaluation_policy=config.engine.val_evaluation_policy,
         use_cloudpickle=config.engine.use_cloudpickle,
         evaluation_cache=evaluation_cache,

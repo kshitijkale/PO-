@@ -1,8 +1,11 @@
 import os
+from pathlib import Path
 
 import dspy
+from dotenv import load_dotenv
 
 from examples.aime_math.utils import evaluate_on_dataset, load_math_dataset, math_metric, run_llm
+from examples.aime_math.verbose_logging_callback import VerboseLoggingCallback
 from gepa.optimize_anything import (
     EngineConfig,
     GEPAConfig,
@@ -10,6 +13,8 @@ from gepa.optimize_anything import (
     SideInfo,
     optimize_anything,
 )
+
+load_dotenv(Path(__file__).parent / ".env")
 
 
 def evaluate(candidate: str, example) -> tuple[float, SideInfo]:
@@ -52,6 +57,7 @@ def main():
         reflection=ReflectionConfig(
             reflection_lm="openai/gpt-5.1",
         ),
+        callbacks=[VerboseLoggingCallback(log_file="outputs/aime_math/verbose.log")],
     )
 
     result = optimize_anything(

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEPA Candidate Tree</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; width: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8f9fa; display: flex; flex-direction: column; }
+  #header { background: #fff; border-bottom: 1px solid #dee2e6; padding: 12px 20px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  #header h1 { font-size: 18px; font-weight: 600; color: #212529; }
+  .legend { display: flex; gap: 14px; font-size: 13px; color: #495057; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #adb5bd; }
+  #graph-container { flex: 1 1 auto; width: 100%; overflow: auto; padding: 20px; text-align: center; }
+  #graph-container svg { width: 100%; height: 100%; }
+  #tooltip {
+    display: none; position: fixed; background: #fff; border: 1px solid #dee2e6;
+    border-radius: 8px; padding: 14px 16px; max-width: 560px; max-height: 70vh; overflow-y: auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18); z-index: 1000; font-size: 13px; line-height: 1.5;
+  }
+  #tooltip .tt-header { font-weight: 700; font-size: 15px; margin-bottom: 6px; color: #212529; }
+  #tooltip .tt-meta { color: #6c757d; margin-bottom: 4px; }
+  #tooltip .tt-hint { color: #adb5bd; font-size: 11px; font-style: italic; margin-bottom: 10px; }
+  #tooltip .tt-comp-name { font-weight: 600; color: #495057; margin-top: 10px; border-bottom: 1px solid #e9ecef; padding-bottom: 2px; }
+  #tooltip .tt-comp-text {
+    white-space: pre-wrap; word-break: break-word; background: #f8f9fa;
+    border: 1px solid #e9ecef; border-radius: 4px; padding: 8px 10px; margin-top: 4px;
+    font-family: "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px;
+    max-height: 200px; overflow-y: auto;
+  }
+  .role-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+  .role-best { background: #00e5ff33; color: #006064; }
+  .role-pareto { background: #ff980033; color: #e65100; }
+  .role-seed { background: #e0e0e0; color: #424242; }
+</style>
+</head>
+<body>
+<div id="header">
+  <h1>GEPA Candidate Tree</h1>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:cyan"></div> Best</div>
+    <div class="legend-item"><div class="legend-dot" style="background:orange"></div> Pareto Front</div>
+    <div class="legend-item"><div class="legend-dot" style="background:lightgray"></div> Other</div>
+  </div>
+</div>
+<div id="graph-container"><p>Loading graph&hellip;</p></div>
+<div id="tooltip"></div>
+
+<script type="module">
+const NODES = [{"idx": 0, "score": 0.4667, "parents": "seed", "role": "Seed", "components": {"current_candidate": "Solve the math problem carefully. Break down the steps and provide the final answer as a single number."}},
+{"idx": 1, "score": 0.4222, "parents": "0", "role": "Pareto Front", "components": {"current_candidate": "Solve the math problem carefully. Show all reasoning step by step, explicitly checking edge cases and alternative configurations. If relevant, compare different plausible constructions or cases to ensure the maximum/minimum or count is truly attained. Use known theorems by name only when you also verify that all their conditions apply here (including extremal/uniqueness conditions). At the end, clearly state the final answer as a single number on its own line."}},
+{"idx": 2, "score": 0.4667, "parents": "1", "role": "", "components": {"current_candidate": "Solve the math problem carefully and thoroughly. Show all reasoning step by step, but keep the structure organized and avoid unnecessary repetition or guesswork. Explicitly:\n\n- Translate the problem into clear mathematical notation and define all variables.\n- Justify each algebraic or logical step; if you use known theorems or identities, briefly verify that their conditions hold in this context.\n- For counting or combinatorial problems, clearly describe the casework or bijection, and explain why all cases are covered without overcounting.\n- For equations or systems, simplify rigorously and avoid approximate or heuristic numerics unless explicitly requested; do not rely on \u201capproximate patterns\u201d to conclude an exact answer.\n- If the expression defining the object (e.g., a polynomial or generating function) can be simplified structurally (factoring, cancelling, transforming products into sums), do that first, and clearly argue why the simplification is valid (e.g., domain restrictions like \\(0<x<1\\)).\n- When solving Diophantine or integer-coefficient problems, favor modular arithmetic, factorization, or combinatorial arguments over ad hoc enumeration; if you do use enumeration, make the bounds and completeness of the search explicit.\n\nThroughout the solution, explicitly check edge cases and alternative configurations that might violate hidden assumptions (such as parity, sign, domain, or degenerate geometric configurations), and state why they are or are not possible.\n\nAt the end, after all justification, clearly state the final answer as a single number on its own line with no additional text."}},
+{"idx": 3, "score": 0.4889, "parents": "1", "role": "Pareto Front", "components": {"current_candidate": "Solve the math problem carefully and rigorously. Show all reasoning step by step, but keep the solution as streamlined as possible while remaining fully correct. Explicitly handle any necessary casework or edge conditions; avoid unnecessary or speculative cases. When using known theorems, briefly verify that their hypotheses are satisfied in this problem before applying them. Check any counting or optimization steps with a clear, preferably algebraic or invariant-based argument rather than approximate or heuristic reasoning. At the end, clearly state the final answer on its own line as a single number (with no additional words or symbols)."}},
+{"idx": 4, "score": 0.4444, "parents": "1", "role": "", "components": {"current_candidate": "Solve the math problem carefully and correctly. Show all reasoning step by step, but keep the solution as concise as possible while remaining clear. Explicitly:\n\n- Interpret the problem precisely and set up appropriate equations or constructions.\n- Use algebraic or geometric methods that lead efficiently to the exact answer.\n- Check all domain restrictions and edge cases (e.g., excluded values, degeneracies) that could invalidate steps or introduce extraneous solutions.\n- When using a known theorem or formula, briefly verify that its hypotheses are satisfied in this specific problem.\n- Avoid unnecessary numeric approximation when an exact symbolic approach is feasible.\n- If multiple solution paths exist, choose a clean, direct one rather than exploring many alternatives.\n\nAt the end, after fully justifying the result, output only the final answer as a bare integer on its own line, with no additional text, symbols, or formatting."}},
+{"idx": 5, "score": 0.4667, "parents": "4", "role": "", "components": {"current_candidate": "Solve the math problem carefully and correctly. Show all reasoning step by step, but keep the solution as concise as possible while remaining clear. Explicitly:\n\n- Interpret the problem precisely and set up appropriate equations or constructions.\n- Use algebraic or geometric methods that lead efficiently to the exact answer.\n- Check all domain restrictions and edge cases (e.g., excluded values, degeneracies) that could invalidate steps or introduce extraneous solutions.\n- When using a known theorem or formula, briefly verify that its hypotheses are satisfied in this specific problem.\n- Avoid unnecessary numeric approximation when an exact symbolic approach is feasible.\n- If multiple solution paths exist, choose a clean, direct one rather than exploring many alternatives.\n- Throughout the solution, frequently connect algebraic expressions back to the geometric configuration or original problem statement, to catch sign or configuration errors early.\n- Prefer structural or symmetry-based observations (similar triangles, power of a point, radical axis, projections, etc.) before introducing heavy coordinate or algebraic setups.\n\nAt the end, after fully justifying the result, output only the final answer as a bare integer on its own line, with no additional text, symbols, or formatting."}},
+{"idx": 6, "score": 0.5333, "parents": "3", "role": "Pareto Front", "components": {"current_candidate": "Solve the math problem carefully and rigorously. Your goal is to obtain the correct final numerical answer; prioritize correctness over elegance.\n\nRequirements:\n- Show your reasoning step by step, but keep the solution as streamlined as possible while remaining fully correct.\n- Explicitly justify any algebraic transformations and identities you use, especially when simplifying expressions or changing variables.\n- When using known theorems or identities, briefly verify that their hypotheses are satisfied in this problem before applying them.\n- For equations or systems, solve them fully and then substitute your solutions back into the original conditions to check they truly work.\n- When there is casework (including implicit cases like a parameter being zero vs. nonzero), explicitly identify and handle all necessary cases; avoid speculative or unnecessary case splits.\n- For counting, optimization, or \u201cfind all solutions\u201d problems, give a clear argument that your list of solutions is complete (e.g., via structural characterization, divisibility arguments, inequalities, or invariants), not just examples that work.\n- If you derive a parametrization or family of solutions, verify that it produces exactly all solutions (no missing or extraneous ones).\n- Be especially careful when:\n  * Manipulating symmetric expressions or applying Vieta\u2019s formulas\u2014double\u2011check that you haven\u2019t implicitly restricted solutions.\n  * Using high\u2011powered results (like Fermat\u2019s Last Theorem): only invoke results that are standard at the contest\u2019s level and actually applicable as stated.\n  * Making \u201cWLOG\u201d assumptions: ensure symmetry truly justifies them and that ordered vs. unordered objects are correctly handled.\n- If a previous plausible line of reasoning leads to a contradiction with a known correct result or a consistency check, backtrack and correct the argument rather than forcing the conclusion.\n\nOutput format:\n- Write a single, coherent solution.\n- At the very end, on its own line, state the final answer as a single number with no additional words or symbols."}},
+{"idx": 7, "score": 0.5556, "parents": "1", "role": "Best", "components": {"current_candidate": "Solve the math problem carefully. Show all reasoning step by step, but keep algebraic work as streamlined as possible rather than exhaustively branching. Explicitly check for symmetry and key edge cases (such as equal variables or obvious special values), but avoid overcomplicating with unnecessary case splits. When using any named theorems or standard facts, briefly verify that their conditions hold in this situation. Make sure to account for all distinct solutions relevant to the question (e.g., all possible values of a variable, not just symmetric ones), and avoid double-counting. At the end, clearly state the final answer on its own line as a single number with no additional text."}}];
+const DOT = `digraph G {
+    rankdir=TB;
+    node [style=filled, shape=circle, fontsize=14, width=0.6, height=0.6];
+    0 [label="0\\n(0.47)", fillcolor=lightgray, tooltip=" "];
+    1 [label="1\\n(0.42)", fillcolor=orange, tooltip=" "];
+    2 [label="2\\n(0.47)", fillcolor=lightgray, tooltip=" "];
+    3 [label="3\\n(0.49)", fillcolor=orange, tooltip=" "];
+    4 [label="4\\n(0.44)", fillcolor=lightgray, tooltip=" "];
+    5 [label="5\\n(0.47)", fillcolor=lightgray, tooltip=" "];
+    6 [label="6\\n(0.53)", fillcolor=orange, tooltip=" "];
+    7 [label="7\\n(0.56)", fillcolor=cyan, tooltip=" "];
+    0 -> 1;
+    1 -> 2;
+    1 -> 3;
+    1 -> 4;
+    4 -> 5;
+    3 -> 6;
+    1 -> 7;
+}`;
+
+const nodeMap = {};
+NODES.forEach(n => { nodeMap[n.idx] = n; });
+
+let pinnedIdx = null;   // non-null when tooltip is click-pinned (scrollable)
+let hoverIdx = null;    // non-null when hovering over a node
+
+function renderTooltip(idx) {
+  const n = nodeMap[idx];
+  if (!n) return "";
+  let roleBadge = "";
+  if (n.role === "Best") roleBadge = '<span class="role-badge role-best">BEST</span>';
+  else if (n.role === "Pareto Front") roleBadge = '<span class="role-badge role-pareto">PARETO</span>';
+  else if (n.role === "Seed") roleBadge = '<span class="role-badge role-seed">SEED</span>';
+
+  let comps = "";
+  for (const [name, text] of Object.entries(n.components)) {
+    const escaped = text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    comps += '<div class="tt-comp-name">' + name + '</div><div class="tt-comp-text">' + escaped + '</div>';
+  }
+
+  return '<div class="tt-header">Candidate ' + n.idx + roleBadge + '</div>' +
+    '<div class="tt-meta">Score: <strong>' + n.score + '</strong>&nbsp;&nbsp;|&nbsp;&nbsp;Parent(s): ' + n.parents +
+    '</div><div class="tt-hint">' + (pinnedIdx === idx ? 'Click node again to dismiss' : 'Click to pin &amp; scroll') + '</div>' +
+    comps;
+}
+
+function positionTooltip(x, y) {
+  const tt = document.getElementById("tooltip");
+  let tx = x + 16, ty = y + 16;
+  const r = tt.getBoundingClientRect();
+  if (tx + r.width > window.innerWidth - 8) tx = x - r.width - 16;
+  if (ty + r.height > window.innerHeight - 8) ty = y - r.height - 16;
+  if (tx < 8) tx = 8;
+  if (ty < 8) ty = 8;
+  tt.style.left = tx + "px";
+  tt.style.top = ty + "px";
+}
+
+function showTooltip(idx, x, y) {
+  const tt = document.getElementById("tooltip");
+  tt.innerHTML = renderTooltip(idx);
+  tt.style.display = "block";
+  positionTooltip(x, y);
+}
+
+function hideTooltip() {
+  pinnedIdx = null;
+  hoverIdx = null;
+  document.getElementById("tooltip").style.display = "none";
+}
+
+// Click outside tooltip and outside nodes dismisses pinned tooltip
+document.addEventListener("mousedown", function(e) {
+  const tt = document.getElementById("tooltip");
+  if (pinnedIdx !== null && tt.style.display === "block"
+      && !tt.contains(e.target) && !e.target.closest(".node")) {
+    hideTooltip();
+  }
+});
+
+async function render() {
+  const { instance } = await import("https://cdn.jsdelivr.net/npm/@viz-js/viz@3.11.0/lib/viz-standalone.mjs");
+  const viz = await instance();
+  const svg = viz.renderSVGElement(DOT);
+  const container = document.getElementById("graph-container");
+  container.innerHTML = "";
+  container.appendChild(svg);
+
+  // Attach hover listeners and strip native <title> tooltips to avoid double tooltips
+  svg.querySelectorAll(".node").forEach(node => {
+    const title = node.querySelector("title");
+    if (!title) return;
+    const idx = parseInt(title.textContent, 10);
+    if (isNaN(idx)) return;
+    title.remove();  // remove native SVG tooltip
+    node.style.cursor = "pointer";
+    // Hover: show tooltip following the mouse (non-interactive)
+    node.addEventListener("mouseenter", e => {
+      if (pinnedIdx !== null) return;  // don't override a pinned tooltip
+      hoverIdx = idx;
+      showTooltip(idx, e.clientX, e.clientY);
+    });
+    node.addEventListener("mousemove", e => {
+      if (pinnedIdx !== null || hoverIdx !== idx) return;
+      positionTooltip(e.clientX, e.clientY);
+    });
+    node.addEventListener("mouseleave", () => {
+      if (pinnedIdx !== null) return;
+      hoverIdx = null;
+      document.getElementById("tooltip").style.display = "none";
+    });
+    // Click: pin the tooltip so user can scroll it
+    node.addEventListener("click", e => {
+      e.stopPropagation();
+      if (pinnedIdx === idx) { hideTooltip(); return; }
+      pinnedIdx = idx;
+      showTooltip(idx, e.clientX, e.clientY);
+    });
+  });
+  // Also strip <title> from edges and the graph itself
+  svg.querySelectorAll(".edge title").forEach(t => t.remove());
+  const graphTitle = svg.querySelector(":scope > title");
+  if (graphTitle) graphTitle.remove();
+}
+
+render().catch(err => {
+  document.getElementById("graph-container").innerHTML =
+    "<p style='color:red'>Failed to render graph: " + err.message + "</p>" +
+    "<pre>" + DOT.replace(/</g,"&lt;") + "</pre>";
+});
+</script>
+</body>
+</html>
