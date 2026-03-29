@@ -40,14 +40,14 @@ def main():
     )
 
     api_key = os.environ.get("OPENAI_API_KEY")
-    solver_lm = dspy.LM("gpt-4.1-mini", api_key=api_key, temperature=1.0, max_tokens=32000)
+    solver_lm = dspy.LM("gpt-4.1-mini", api_key=api_key, temperature=0.0, max_tokens=32000, cache=False)
     dspy.configure(lm=solver_lm)
 
     trainset, valset, testset = load_math_dataset()
 
     gepa_config = GEPAConfig(
         engine=EngineConfig(
-            run_dir="outputs/aime_math",
+            run_dir="outputs/aime_math_t0",
             max_metric_calls=500,
             track_best_outputs=True,
             parallel=True,
@@ -57,7 +57,7 @@ def main():
         reflection=ReflectionConfig(
             reflection_lm="openai/gpt-5.1",
         ),
-        callbacks=[VerboseLoggingCallback(log_file="outputs/aime_math/verbose.log")],
+        callbacks=[VerboseLoggingCallback(log_file="outputs/aime_math_t0/verbose.log")],
     )
 
     result = optimize_anything(

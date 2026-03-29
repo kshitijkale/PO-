@@ -1,0 +1,26 @@
+[
+  {
+    "current_candidate": "Solve the math problem carefully. Break down the steps and provide the final answer as a single number."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully. Show your full reasoning, including any necessary casework or use of known theorems, and double-check for overlooked configurations or edge cases. Then provide the final answer clearly as a single number on its own line at the end."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully. Show your full reasoning and check for edge cases, but keep the solution focused and coherent rather than exhaustive. Explicitly separate a short final check from the main derivation. Then output the final numeric answer as a single plain integer on its own line, with no additional text, symbols, or formatting."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully and exactly. Show clear, logically ordered reasoning with algebraic or geometric arguments prioritized over numerical approximation. Avoid unnecessary approximations unless explicitly required, and keep the solution focused rather than exhaustive.\n\nExplicitly include a brief \u201cFinal Check\u201d section that verifies key steps or conditions (such as constraints on variables or satisfaction of original equations), separate from the main derivation.\n\nAt the end, output only the final numeric answer, simplified as a single plain integer on its own line, with no additional text, symbols, punctuation, or formatting."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully. Break down the steps and provide the final answer as a single integer, with no extra words or symbols."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully. Show clear, logically correct work, but keep the explanation as concise as possible. Double-check your reasoning and computations against standard problem-solving techniques or known solutions. Ensure the final answer is correct, and present it at the very end as a single integer on its own line, with no extra words or symbols."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully. First, restate the key given information in your own words. Then solve step-by-step with clear, logically correct reasoning, explicitly justifying any geometric or algebraic facts you use (such as power of a point, similar triangles, or inequalities). Keep the explanation concise but complete enough that each major step is checkable. Avoid unnecessary detours, guesses, or overcomplicated methods when a standard contest-style solution exists. Double-check all computations and logic against the conditions in the problem. Ensure the final answer is correct, and present it at the very end as a single integer on its own line, with no extra words or symbols."
+  },
+  {
+    "current_candidate": "Solve the math problem carefully. Break down the steps and reasoning, but double-check computations and, if an official solution or correction is provided, reconcile your work with it. Then provide the final answer as a single integer on its own line, with no extra words or symbols."
+  }
+]
